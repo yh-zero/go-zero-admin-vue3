@@ -1,39 +1,44 @@
-# vue3_performance
+## 移动端模板
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+## vite + pinia  + ts + ViewUIPlus + tailwindCss 
 
-#### 软件架构
-软件架构说明
+### 常用目录别名
 
+```js
+alias: {
+  '@': '/src',
+}
+```
 
-#### 安装教程
+### scss 支持、variables.scss、common.scss
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+选择 scss 作为 css 预处理，并对 variables、common.scss 作全局引入。
+```js
+css: {
+    preprocessorOptions: {
+      // 引入公用的样式
+      scss: {
+        additionalData: `@import "@/styles/common.scss";@import "@/styles/variable.scss";`,
+      }
+    }
+  }
+```
+### 模块化自动注册
+vuex, router 模块化<br>
+使用 vite import.meta.globEager 方法获取文件上下文<br>
+下面用路由自动注册为例
 
-#### 使用说明
+```js
+//模块化路由，将router 文件夹下的ts文件内路由自动导入
+const routesModules = import.meta.globEager('./**/*.ts')
+const modules: Array<RouteRecordRaw> = []
+Object.keys(routesModules).forEach(key => {
+  modules.push(...routesModules[key].default)
+})
+routes = routes.concat(modules)
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+})
+```
