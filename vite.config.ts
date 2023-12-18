@@ -2,6 +2,8 @@ import { UserConfig, ConfigEnv, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { proxy } from './build/proxy';
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 const root: string = process.cwd();
 
 // https://vitejs.dev/config/
@@ -16,7 +18,16 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   }: any = loadEnv(mode, root);
   return {
     base: VITE_PUBLIC_PATH,
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      Components({
+        resolvers: [
+          AntDesignVueResolver({
+            importStyle: false, // css in js
+          }),
+        ],
+      }),
+    ],
     // 解析相关 【别名】
     resolve: {
       alias: [
@@ -32,6 +43,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       preprocessorOptions: {
         scss: {
           additionalData: '@import "@/styles/mixin.scss";',
+        },
+        less: {
+          javascriptEnabled: true,
         },
       },
     },

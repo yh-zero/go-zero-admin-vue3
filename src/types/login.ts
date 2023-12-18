@@ -3,7 +3,6 @@ export type LoginType = {
   username: string;
   password: string;
   captcha: string;
-  checkKey: string;
 };
 
 // 验证码返回

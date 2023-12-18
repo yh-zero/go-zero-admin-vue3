@@ -1,6 +1,6 @@
 export const proxy = (target: string) => {
   return {
-    '/nanli': {
+    '/v1': {
       target: target,
       secure: false,
       changeOrigin: true,
