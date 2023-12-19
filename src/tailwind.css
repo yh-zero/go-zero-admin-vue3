@@ -3,3 +3,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.anticon svg {
+  vertical-align: baseline;
+}
+.ant-btn-primary {
+  background-color: #1677ff;
+}
+.ant-btn-default,
+.ant-btn-dashed {
+  background-color: white;
+}
+/* 默认主题色 */
+.theme-nord {
+  --color-primary: 94 129 172;
+}

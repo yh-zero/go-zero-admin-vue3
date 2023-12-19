@@ -1,0 +1,11 @@
+/* 全局主题样式 */
+:root {
+  --themebg: #001529;
+  --textColor: #fff;
+}
+.themebg {
+  background-color: var(--themebg) !important;
+}
+.textColor {
+  color: var(--textColor) !important;
+}

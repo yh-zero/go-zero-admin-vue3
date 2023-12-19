@@ -5,9 +5,11 @@ import router from '@/router/index';
 import { UserType, LoginType } from '@/types/login';
 import lodash from 'lodash';
 const defaultUserInfo: UserType = {
-  saToken: '',
   token: '',
-  ticket: '',
+  theme: {
+    bgColor: '#001529',
+    textColor: '#ffffff',
+  },
 };
 type UserState = {
   userInfo: UserType;

@@ -2,14 +2,17 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getToken } from '@/utils/auth';
 import { baseUrl, mode } from '@/config/config';
+import { message } from 'ant-design-vue';
 // 设置请求头和请求路径
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 const instance = axios.create({
   baseURL: mode.IS_DEV ? '/' : baseUrl,
   timeout: 10000,
-  headers: {
-    'from-applet': 'qukuaileyuan',
-  },
+  headers: mode.IS_DEV
+    ? {
+        Isdev: 1,
+      }
+    : {},
 });
 instance.interceptors.request.use(
   config => {
@@ -29,19 +32,17 @@ instance.interceptors.response.use(({ data }): any => {
     return Promise.resolve(data.result);
   } else if (data.code === 100003) {
     // token失效 清理登录信息
-    message('请重新登录');
+    toMessage('请重新登录');
     return Promise.reject(data.message);
-  } else if (data.code === 2002001) {
-    message(data?.message);
+  } else {
+    toMessage(data?.message);
     return Promise.reject(data.message);
   }
 });
 
 // 消息通知
-function message(msg: string) {
-  console.log('====================================');
-  console.log(msg);
-  console.log('====================================');
+function toMessage(msg: string) {
+  message.error(msg);
 }
 
 export default instance;
