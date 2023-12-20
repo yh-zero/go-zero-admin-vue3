@@ -5,5 +5,10 @@ export const proxy = (target: string) => {
       secure: false,
       changeOrigin: true,
     },
+    '/api': {
+      target: 'https://demo.gin-vue-admin.com',
+      secure: false,
+      changeOrigin: true,
+    },
   };
 };

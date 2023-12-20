@@ -1,6 +1,6 @@
 //http.ts
-import axios, { AxiosRequestConfig } from 'axios';
-import { getToken } from '@/utils/auth';
+import axios from 'axios';
+import { useUserStoreWithOut } from '@/store/modules/user';
 import { baseUrl, mode } from '@/config/config';
 import { message } from 'ant-design-vue';
 // 设置请求头和请求路径
@@ -16,9 +16,10 @@ const instance = axios.create({
 });
 instance.interceptors.request.use(
   config => {
-    const token = getToken();
+    // 添加token请求头
+    const token = useUserStoreWithOut().getToken;
     if (token) {
-      config.headers.token = token;
+      config.headers.Authorization = token;
     }
     return config;
   },
@@ -32,7 +33,8 @@ instance.interceptors.response.use(({ data }): any => {
     return Promise.resolve(data.result);
   } else if (data.code === 100003) {
     // token失效 清理登录信息
-    toMessage('请重新登录');
+    useUserStoreWithOut().resetState();
+    toMessage('登录过期,请重新登录');
     return Promise.reject(data.message);
   } else {
     toMessage(data?.message);

@@ -1,14 +1,14 @@
 import storage from './storage';
-const TokenKey = 'Token';
+const TokenKey = 'Authorization';
 
-export function getToken() {
+export function getStorageToken() {
   return storage.get(TokenKey) || '';
 }
 
-export function setToken(token: string) {
+export function setStorageToken(token: string) {
   storage.set(TokenKey, token, 23 * 60 * 60 * 1000);
 }
 
-export function removeToken() {
+export function removeStorageToken() {
   storage.remove(TokenKey);
 }

@@ -37,11 +37,11 @@ const http: Http = {
         .post(url, JSON.stringify(params))
         .then(res => {
           NProgress.done();
-          resolve(res.data);
+          resolve(res);
         })
         .catch(err => {
           NProgress.done();
-          reject(err.data);
+          reject(err);
         });
     });
   },
@@ -54,11 +54,11 @@ const http: Http = {
         })
         .then(res => {
           NProgress.done();
-          resolve(res.data);
+          resolve(res);
         })
         .catch(err => {
           NProgress.done();
-          reject(err.data);
+          reject(err);
         });
     });
   },

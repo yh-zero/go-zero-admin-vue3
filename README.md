@@ -1,6 +1,6 @@
 ## 移动端模板
 
-## vite + pinia  + ts + ViewUIPlus + tailwindCss 
+## vite + pinia  + ts + antDesignVue4.x + tailwindCss + formily2.x
 
 ### 常用目录别名
 

@@ -67,8 +67,14 @@
               </a-col>
               <a-col :span="8">
                 <img
+                  v-if="captchaImg"
                   @click="toGetCaptcha"
-                  :src="captchaImg || '@/assets/images/login/checkcode.png'"
+                  :src="captchaImg"
+                />
+                <img
+                  v-else
+                  @click="toGetCaptcha"
+                  src="@/assets/images/login/checkcode.png"
                 />
               </a-col>
             </a-row>
@@ -99,7 +105,11 @@ import {
 import { onMounted, reactive, ref } from 'vue';
 import { LoginType, LoginRespType } from '@/types/login';
 import { getCaptcha, login } from '@/api/modules/loginApi';
+import { useUserStore } from '@/store/modules/user';
 import { mode } from '@/config/config';
+import router from '@/router';
+// hooks
+const userStore = useUserStore();
 onMounted(() => {
   toGetCaptcha();
   if (mode.IS_DEV) {
@@ -124,7 +134,8 @@ const loginFrom = reactive<LoginType>({
 // 登录
 async function handleSubmit() {
   const res = await login(loginFrom);
-  console.log(res);
+  userStore.setUserInfo(res);
+  router.replace('/system');
 }
 // 表单校验
 const onFinishFailed = (errorInfo: string) => {

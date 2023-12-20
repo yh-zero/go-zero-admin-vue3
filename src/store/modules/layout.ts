@@ -5,7 +5,7 @@ import { LayoutType } from '@/types/layout';
 /**
  * 参数1，容器的id 必须唯一
  */
-export const useUserStore = defineStore({
+export const useLayoutStore = defineStore({
   id: 'layout',
   state: (): LayoutType => ({
     collapsed: false,
@@ -16,6 +16,6 @@ export const useUserStore = defineStore({
 });
 
 // Need to be used outside the setup
-export function useUserStoreWithOut() {
-  return useUserStore(store);
+export function useLayoutStoreWithOut() {
+  return useLayoutStore(store);
 }

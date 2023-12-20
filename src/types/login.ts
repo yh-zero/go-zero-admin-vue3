@@ -12,14 +12,8 @@ export interface CaptchaType {
 
 // 登录返回
 export interface LoginRespType {
-  saToken: string;
-  token: string;
-  ticket: string;
-}
-
-// 用户信息
-export interface UserType {
-  token: string;
+  accessExpire: number;
+  accessToken: string;
   theme: {
     bgColor: string;
     textColor: string;

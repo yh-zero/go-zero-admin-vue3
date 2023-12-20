@@ -1,31 +1,53 @@
 import { store } from '../index';
 import { defineStore } from 'pinia';
-import { removeToken, setToken } from '@/utils/auth';
+import {
+  getStorageToken,
+  setStorageToken,
+  removeStorageToken,
+} from '@/utils/auth';
 import router from '@/router/index';
-import { UserType, LoginType } from '@/types/login';
+import { LoginRespType, LoginType } from '@/types/login';
 import lodash from 'lodash';
-const defaultUserInfo: UserType = {
-  token: '',
+const defaultUserInfo: LoginRespType = {
+  accessExpire: 0,
+  accessToken: '',
   theme: {
     bgColor: '#001529',
     textColor: '#ffffff',
   },
 };
 type UserState = {
-  userInfo: UserType;
+  userInfo: LoginRespType;
   contentId: string;
 };
 /**
  * 参数1，容器的id 必须唯一
  */
 export const useUserStore = defineStore({
-  id: 'user',
+  id: 'userInfo',
   state: (): UserState => ({
     userInfo: lodash.cloneDeep(defaultUserInfo),
     contentId: '',
   }),
-  getters: {},
-  actions: {},
+  getters: {
+    getToken(): string {
+      return this.userInfo.accessToken || getStorageToken();
+    },
+  },
+  actions: {
+    // 清除登录信息
+    resetState() {
+      removeStorageToken();
+      // 跳转到登录页
+      router.replace({
+        path: '/',
+      });
+    },
+    setUserInfo(info: LoginRespType) {
+      setStorageToken(info.accessToken);
+      this.userInfo = info;
+    },
+  },
   persist: true,
 });
 
