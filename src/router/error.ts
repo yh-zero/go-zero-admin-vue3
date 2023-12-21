@@ -21,7 +21,10 @@ const errorRouter: RouteRecordRaw[] = [
   },
   {
     path: '/:catchAll(.*)',
-    redirect: '/404',
+    meta: {
+      closeTab: true,
+    },
+    component: () => import('@/error/404.vue'),
   },
 ];
 

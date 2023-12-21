@@ -1855,6 +1855,11 @@
   resolved "https://registry.npmmirror.com/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz#d3357479a0fdfdd5907fe67e17e0a85c906e1301"
   integrity sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==
 
+"@types/nprogress@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.npmmirror.com/@types/nprogress/-/nprogress-0.2.3.tgz#b2150b054a13622fabcba12cf6f0b54c48b14287"
+  integrity sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.npmmirror.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"

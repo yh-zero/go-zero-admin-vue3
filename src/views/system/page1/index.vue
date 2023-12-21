@@ -1,12 +1,13 @@
 <template>
-  <div class="w-[100px] h-[100px] themebg textColor">SYSTEM</div>
+  <div></div>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { asyncMenu } from '@/api/modules/menuApi';
+import { useLayoutStore } from '@/store/modules/layout';
+const layoutStore = useLayoutStore();
 onMounted(() => {
-  asyncMenu();
+  layoutStore.getMenu();
 });
 </script>
 

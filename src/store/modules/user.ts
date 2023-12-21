@@ -38,10 +38,11 @@ export const useUserStore = defineStore({
     // 清除登录信息
     resetState() {
       removeStorageToken();
-      // 跳转到登录页
-      router.replace({
-        path: '/',
-      });
+      (this.userInfo = lodash.cloneDeep(defaultUserInfo)),
+        // 跳转到登录页
+        router.replace({
+          path: '/',
+        });
     },
     setUserInfo(info: LoginRespType) {
       setStorageToken(info.accessToken);
