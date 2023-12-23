@@ -1,12 +1,25 @@
 import { RouterType, MenuRespType } from '@/types/layout';
 import { RouteRecordRaw } from 'vue-router';
+
+import router from '@/router';
 const viewModules = import.meta.glob('../views/**/*.vue');
 const pluginModules = import.meta.glob('../plugins/**/*.vue');
+
+// 动态添加路由
+export const setAsyncRouter = (route: RouteRecordRaw) => {
+  router.addRoute(route);
+  console.log(route);
+  console.log(router.getRoutes());
+
+  return Promise.resolve();
+};
 
 // 路由菜单返回列表转换路由格式 MenuRespType => RouterType
 export const asyncMenuToRouter = (menus: MenuRespType[]): RouterType[] => {
   const routerList: RouterType[] = [];
   menus.forEach(menu => {
+    console.log(menu.path);
+
     const route: RouterType = {
       componentPath: menu.component,
       path: menu.path,
@@ -35,7 +48,7 @@ export const asyncRouterHandle = (
   const routerList: RouteRecordRaw[] = [];
   asyncRouter.forEach(item => {
     const routers: RouteRecordRaw = {
-      path: '/' + item.path, //路由路径
+      path: item.path, //路由路径
       name: item.name, //路由name
       component: null, //页面路径 //'view/layout/index.vue'
       meta: item.meta, //

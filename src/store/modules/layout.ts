@@ -3,14 +3,18 @@ import { RouteRecordRaw } from 'vue-router';
 import { defineStore } from 'pinia';
 import { MenuRespType } from '@/types/layout';
 import { asyncMenu } from '@/api/modules/menuApi';
-import router from '@/router';
+import layoutRouter from '@/router/modules/layout';
 //
-import { asyncRouterHandle, asyncMenuToRouter } from '@/utils/asyncRouter';
+import {
+  asyncRouterHandle,
+  asyncMenuToRouter,
+  setAsyncRouter,
+} from '@/utils/asyncRouter';
 
 interface LayoutType {
+  isRefresh: boolean; //记录是否被刷新 被刷新了需要重新 addRoute
   collapsed: boolean; // 菜单栏收起状态
   menuType: MenuRespType[]; // 菜单栏数据
-  menuList: RouteRecordRaw[]; //路由列表
 }
 /**
  * 参数1，容器的id 必须唯一
@@ -18,9 +22,9 @@ interface LayoutType {
 export const useLayoutStore = defineStore({
   id: 'layout',
   state: (): LayoutType => ({
+    isRefresh: false,
     collapsed: false,
     menuType: [],
-    menuList: [],
   }),
   getters: {},
   actions: {
@@ -28,16 +32,20 @@ export const useLayoutStore = defineStore({
       const res = await asyncMenu();
       this.menuType = res.menus; //保存返回的数据
       // 获取对应的路由
-      const routerList = asyncMenuToRouter(this.menuType);
-      const routers = asyncRouterHandle(routerList);
-      routers.forEach(route => {
-        console.log(route);
-        router.addRoute(route);
-      });
+      this.setRouter();
+      return true;
+    },
+    // 添加动态路由
+    async setRouter() {
+      const routerList = asyncRouterHandle(asyncMenuToRouter(this.menuType));
+      layoutRouter[0].children = routerList;
+      await setAsyncRouter(layoutRouter[0]);
+      this.isRefresh = true;
+      return true;
     },
   },
   persist: {
-    paths: ['collapsed'],
+    paths: ['collapsed', 'menuType'],
   },
 });
 

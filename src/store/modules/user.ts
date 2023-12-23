@@ -18,7 +18,7 @@ const defaultUserInfo: LoginRespType = {
 };
 type UserState = {
   userInfo: LoginRespType;
-  contentId: string;
+  contentId: String;
 };
 /**
  * 参数1，容器的id 必须唯一
@@ -30,7 +30,7 @@ export const useUserStore = defineStore({
     contentId: '',
   }),
   getters: {
-    getToken(): string {
+    getToken(): String {
       return this.userInfo.accessToken || getStorageToken();
     },
   },

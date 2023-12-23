@@ -19,6 +19,8 @@ instance.interceptors.request.use(
     // 添加token请求头
     const token = useUserStoreWithOut().getToken;
     if (token) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       config.headers.Authorization = token;
     }
     return config;

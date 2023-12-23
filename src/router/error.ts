@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const errorRouter: RouteRecordRaw[] = [
   {
-    name: '/NotFound',
+    name: '404',
     path: '/404',
     component: () => import('@/error/404.vue'),
     meta: {
@@ -11,7 +11,7 @@ const errorRouter: RouteRecordRaw[] = [
     },
   },
   {
-    name: '/Error',
+    name: '500',
     path: '/500',
     component: () => import('@/error/500.vue'),
     meta: {

@@ -102,13 +102,16 @@ import {
   LockOutlined,
   SmileOutlined,
 } from '@ant-design/icons-vue';
+import { message } from 'ant-design-vue';
 import { onMounted, reactive, ref } from 'vue';
 import { LoginType, LoginRespType } from '@/types/login';
 import { getCaptcha, login } from '@/api/modules/loginApi';
 import { useUserStore } from '@/store/modules/user';
 import { mode } from '@/config/config';
+import { useLayoutStore } from '@/store/modules/layout';
 import router from '@/router';
 // hooks
+const layoutStore = useLayoutStore();
 const userStore = useUserStore();
 onMounted(() => {
   toGetCaptcha();
@@ -135,7 +138,16 @@ const loginFrom = reactive<LoginType>({
 async function handleSubmit() {
   const res = await login(loginFrom);
   userStore.setUserInfo(res);
-  router.replace('/system');
+  // 获取菜单 并且添加路由 跳转到 角色的默认路由 defaultRouter
+  await layoutStore.getMenu();
+  layoutStore.setRouter();
+  if (!router.hasRoute('superAdmin')) {
+    message.error('请联系管理员进行授权');
+  } else {
+    // replace
+    // await router.replace({ name: 'superAdmin' });
+    await router.push({ name: 'superAdmin' });
+  }
 }
 // 表单校验
 const onFinishFailed = (errorInfo: string) => {

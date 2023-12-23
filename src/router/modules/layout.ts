@@ -2,28 +2,11 @@ import { RouteRecordRaw } from 'vue-router';
 import Layout from '@/components/Layout/index.vue';
 const layoutRouter: RouteRecordRaw[] = [
   {
-    name: '',
-    path: '/systemLayout',
+    name: 'sys',
+    path: '/sys',
     component: Layout,
     children: [
-      {
-        name: 'system',
-        path: '/system',
-        component: () => import('@/views/system/page1/index.vue'),
-        meta: {
-          keepAlive: true,
-          title: '系统',
-        },
-      },
-      {
-        name: 'system2',
-        path: '/system2',
-        component: () => import('@/views/system/page2/index.vue'),
-        meta: {
-          keepAlive: true,
-          title: '系统2',
-        },
-      },
+      // 这里的是放 layout里面的页面 动态获取
     ],
   },
 ];
