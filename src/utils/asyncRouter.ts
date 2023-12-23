@@ -8,9 +8,6 @@ const pluginModules = import.meta.glob('../plugins/**/*.vue');
 // 动态添加路由
 export const setAsyncRouter = (route: RouteRecordRaw) => {
   router.addRoute(route);
-  console.log(route);
-  console.log(router.getRoutes());
-
   return Promise.resolve();
 };
 
@@ -18,8 +15,6 @@ export const setAsyncRouter = (route: RouteRecordRaw) => {
 export const asyncMenuToRouter = (menus: MenuRespType[]): RouterType[] => {
   const routerList: RouterType[] = [];
   menus.forEach(menu => {
-    console.log(menu.path);
-
     const route: RouterType = {
       componentPath: menu.component,
       path: menu.path,

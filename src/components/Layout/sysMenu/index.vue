@@ -53,11 +53,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
+import { onMounted, ref } from 'vue';
+import { useLayoutStore } from '@/store/modules/layout';
+const layoutStore = useLayoutStore();
+const menuResList = layoutStore.menuList;
+onMounted(() => {
+  console.log('aa', menuResList);
+});
 const collapsed = ref(false);
-const selectedKeys2 = ref<string[]>(['1']);
-const openKeys = ref<string[]>(['sub1']);
+const selectedKeys2 = ref<string[]>(['5']);
+const openKeys = ref<string[]>(['sub2']);
 </script>
 
 <style scoped lang="scss"></style>
