@@ -146,7 +146,7 @@ async function handleSubmit() {
   } else {
     // replace
     // await router.replace({ name: 'superAdmin' });
-    await router.push({ name: 'superAdmin' });
+    await router.push({ name: 'authority' });
   }
 }
 // 表单校验
