@@ -53,8 +53,6 @@ onMounted(() => {
 });
 
 const redirectClick = (link: any) => {
-  console.log(link);
-
   if (link.includes('http')) {
     window.open(link);
     return;

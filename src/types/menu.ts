@@ -15,7 +15,7 @@ export interface MenuDataType {
   component: string;
   sort: number;
   authoritys: any[]; // 未提供authoritys的类型信息
-  children: MenuDataType[];
+  children: MenuDataType[] | null;
   parameters: any[]; // 未提供parameters的类型信息
   menuBtn: any[]; // 未提供menuBtn的类型信息
   meta: MetaType;

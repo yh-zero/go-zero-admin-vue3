@@ -1,10 +1,15 @@
 <template>
-  <a-table :customRow="customRow" />
+  <a-table :customRow="customRow">
+    <template #bodyCell="{ column, record }">
+      <slot name="tableSlot" :column="column" :record="record"></slot>
+    </template>
+  </a-table>
 </template>
 
 <script setup lang="ts">
 import { useAttrs } from 'vue';
 const attrs = useAttrs();
+
 const customRow = () => {
   return {
     // align: 'center',
