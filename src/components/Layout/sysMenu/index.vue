@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import MenuItem from './menuItem/menuItem.vue';
 import { useLayoutStore } from '@/store/modules/layout';
 import { storeToRefs } from 'pinia';

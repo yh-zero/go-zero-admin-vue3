@@ -15,9 +15,21 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import SysTable from '@/components/sysTable/index.vue';
-import {} from 'module';
-const dataSource = [];
+import { asyncMenuList } from '@/api/modules/menuApi';
+import { MenuDataType } from '@/types/menu';
+onMounted(() => {
+  getList();
+});
+async function getList() {
+  const res = await asyncMenuList();
+  dataSource.value = res.list;
+  console.log('====================================');
+  console.log(res);
+  console.log('====================================');
+}
+const dataSource = ref<MenuDataType[]>([]);
 const columns = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
   { title: '展示名称', dataIndex: '', key: '' },
