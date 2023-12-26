@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
+    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
     ACol: typeof import('ant-design-vue/es')['Col']
@@ -23,6 +25,8 @@ declare module 'vue' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ARow: typeof import('ant-design-vue/es')['Row']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
+    ATable: typeof import('ant-design-vue/es')['Table']
+    Breadcrumb: typeof import('./src/components/Layout/header/modules/breadcrumb.vue')['default']
     Buoy: typeof import('./src/components/widget/Buoy.vue')['default']
     Card: typeof import('./src/components/card/index.vue')['default']
     Content: typeof import('./src/components/Layout/content/index.vue')['default']
@@ -31,9 +35,12 @@ declare module 'vue' {
     Index2: typeof import('./src/components/Layout/sysMenu/menuItem/index2.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     Loading: typeof import('./src/components/Loading/index.vue')['default']
-    MenuItem: typeof import('./src/components/Layout/sysMenu/menuItem/MenuItem.vue')['default']
+    MenuItem: typeof import('./src/components/Layout/sysMenu/menuItem/menuItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SysMenu: typeof import('./src/components/Layout/sysMenu/index.vue')['default']
+    SysTable: typeof import('./src/components/sysTable/index.vue')['default']
+    Table: typeof import('./src/components/Table/index.vue')['default']
+    Tabs: typeof import('./src/components/Layout/header/modules/tabs.vue')['default']
   }
 }

@@ -11,7 +11,12 @@
       </template>
       <MenuItem :menu-list="item.children"></MenuItem>
     </a-sub-menu>
-    <a-menu-item v-else :key="item.path + index" :index="item.path">
+    <a-menu-item
+      v-else
+      :key="item.path + index"
+      :index="item.path"
+      @click="toPage(item)"
+    >
       <component :is="item.meta?.icon"></component>
 
       <span> {{ item.meta?.title }}</span>
@@ -21,9 +26,17 @@
 
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router';
+import router from '@/router';
+
 // 参数
 defineProps<{ menuList: RouteRecordRaw[] }>();
-const a = 'LeftOutlined';
+function toPage(page: RouteRecordRaw) {
+  if (page.name) {
+    router.push({ name: page.name });
+  } else {
+    router.push({ path: page.path });
+  }
+}
 </script>
 
 <style scoped></style>

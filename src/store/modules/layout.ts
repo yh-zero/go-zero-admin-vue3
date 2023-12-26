@@ -13,7 +13,12 @@ import {
 
 interface LayoutType {
   isRefresh: boolean; //记录是否被刷新 被刷新了需要重新 addRoute
-  collapsed: boolean; // 菜单栏收起状态
+  menuStatus: {
+    collapsed: boolean; // 菜单栏收起状态
+    openKeys: string[]; //导航栏展开
+    selectedKeys: string[]; ////导航栏展开
+  };
+
   menuResList: MenuRespType[]; // 菜单栏数据
 }
 /**
@@ -23,7 +28,11 @@ export const useLayoutStore = defineStore({
   id: 'layout',
   state: (): LayoutType => ({
     isRefresh: false,
-    collapsed: false,
+    menuStatus: {
+      collapsed: false,
+      openKeys: [],
+      selectedKeys: [],
+    },
     menuResList: [],
   }),
   getters: {
@@ -48,9 +57,12 @@ export const useLayoutStore = defineStore({
       this.isRefresh = true;
       return true;
     },
+    setMenuStatus(menuStatus: LayoutType['menuStatus']) {
+      this.menuStatus = menuStatus;
+    },
   },
   persist: {
-    paths: ['collapsed', 'menuResList'],
+    paths: ['collapsed', 'menuStatus', 'menuResList'],
   },
 });
 
