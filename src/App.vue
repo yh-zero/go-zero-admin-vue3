@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <RouterView></RouterView>
+  <a-config-provider>
+    <RouterView></RouterView>
+  </a-config-provider>
 </template>
 
 <style lang="scss"></style>

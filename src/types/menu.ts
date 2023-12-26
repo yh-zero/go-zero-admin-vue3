@@ -7,6 +7,11 @@ interface MetaType {
   closeTab: boolean;
 }
 
+interface parameters {
+  type: 'query' | 'params';
+  key: string; //"参数key"
+  value: string; //参数值
+}
 export interface MenuDataType {
   parentId: string;
   path: string;
@@ -16,7 +21,7 @@ export interface MenuDataType {
   sort: number;
   authoritys: any[]; // 未提供authoritys的类型信息
   children: MenuDataType[] | null;
-  parameters: any[]; // 未提供parameters的类型信息
+  parameters: parameters[]; // 未提供parameters的类型信息
   menuBtn: any[]; // 未提供menuBtn的类型信息
   meta: MetaType;
   ID: number;

@@ -1,10 +1,5 @@
 <template>
-  <a-modal
-    :cancelText="cancelText"
-    :okText="okText"
-    v-model:open="_open"
-    @ok="handleOK"
-  >
+  <a-modal :cancelText="cancelText" :okText="okText" v-model:open="_open" @ok="handleOK">
     <slot></slot>
   </a-modal>
 </template>

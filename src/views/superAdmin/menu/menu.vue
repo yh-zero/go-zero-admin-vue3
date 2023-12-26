@@ -6,15 +6,7 @@
       </template>
       新增根菜单</a-button
     >
-    <SysTable
-      :rowKey="(record:MenuDataType) => record.ID"
-      :expandedRowKeys="expandedKeys"
-      :onExpand="onExpand"
-      class="mt-3"
-      :dataSource="dataSource"
-      :pagination="false"
-      :columns="columns"
-    >
+    <SysTable :rowKey="(record:MenuDataType) => record.ID" :expandedRowKeys="expandedKeys" :onExpand="onExpand" class="mt-3" :dataSource="dataSource" :pagination="false" :columns="columns">
       <template #tableSlot="{ column, record }">
         <template v-if="column.slotName == 'icon'">
           <component :is="record.meta.icon"></component>
@@ -38,10 +30,7 @@
       </template>
     </SysTable>
   </div>
-  <AddMenuModal
-    :title="addMenuModalTitle"
-    v-model:open="showAddModal"
-  ></AddMenuModal>
+  <AddMenuModal :title="addMenuModalTitle" v-model:open="showAddModal"></AddMenuModal>
 </template>
 
 <script setup lang="ts">
