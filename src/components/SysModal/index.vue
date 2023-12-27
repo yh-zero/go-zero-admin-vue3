@@ -10,6 +10,7 @@ interface Props {
   open: boolean;
   okText?: string;
   cancelText?: string;
+  formRef?: any; //校验表单Ref
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -31,10 +32,18 @@ const _open = computed({
 });
 
 function close(val: any) {
+  if (props.formRef) {
+    props.formRef.clearValidate();
+  }
   emits('update:open', val);
 }
 
-function handleOK() {
+async function handleOK() {
+  if (props.formRef) {
+    await props.formRef.validate();
+    props.formRef.clearValidate();
+    close(false);
+  }
   close(false);
   emits('ok');
 }

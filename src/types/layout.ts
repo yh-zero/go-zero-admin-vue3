@@ -1,6 +1,6 @@
 import { RouteMeta, _RouteRecordBase } from 'vue-router';
 // 路由菜单返回列表
-export interface MenuRespType extends MateType {
+export interface MenuRespType {
   authoritys: null;
   btns: {};
   children: MenuRespType[];
@@ -15,6 +15,7 @@ export interface MenuRespType extends MateType {
   sort: number; //排序标记
   activeName: string; // 高亮菜单
   // =========
+  meta: MateType;
 }
 interface MateType extends RouteMeta {
   keepAlive: boolean; //是否缓存

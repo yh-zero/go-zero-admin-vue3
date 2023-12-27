@@ -14,10 +14,10 @@ import 'ant-design-vue/dist/reset.css';
 
 // main.js
 const app = createApp(App);
-loadAntIcons(app);
 app.use(router);
 // 配置 store
 app.use(store);
+loadAntIcons(app);
 // 注册全局指令
 setupGlobDirectives(app);
 app.mount('#app');

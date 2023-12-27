@@ -9,3 +9,7 @@ export const asyncMenu = (): Promise<{ menus: MenuRespType[] }> => {
 export const asyncMenuList = (): Promise<{ list: MenuDataType[] }> => {
   return http.get('/v1/sys/menu/getMenuList');
 };
+// 添加菜单
+export const addBaseMenu = (data: MenuDataType): Promise<{ list: MenuDataType[] }> => {
+  return http.post('/v1/sys/menu/addBaseMenu', data);
+};

@@ -12,8 +12,12 @@ interface parameters {
   key: string; //"参数key"
   value: string; //参数值
 }
+interface btns {
+  name: string;
+  desc: string; //参数值
+}
 export interface MenuDataType {
-  parentId: string;
+  parentId: number; //父菜单ID
   path: string;
   name: string;
   hidden: boolean;
@@ -22,7 +26,7 @@ export interface MenuDataType {
   authoritys: any[]; // 未提供authoritys的类型信息
   children: MenuDataType[] | null;
   parameters: parameters[]; // 未提供parameters的类型信息
-  menuBtn: any[]; // 未提供menuBtn的类型信息
+  menuBtn: btns[]; // 未提供menuBtn的类型信息
   meta: MetaType;
   ID: number;
   createdAt: string;

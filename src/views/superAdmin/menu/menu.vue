@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-button type="primary" @click="showAddMenu('新增根菜单', '0')">
+    <a-button type="primary" @click="showAddMenu('新增根菜单', true, 0)">
       <template #icon>
         <DownloadOutlined />
       </template>
@@ -13,13 +13,13 @@
         </template>
         <template v-if="column.slotName == 'edit'">
           <div class="w-[300px]">
-            <a-button type="link" @click="showAddMenu('添加子菜单', record.ID)">
+            <a-button type="link" @click="showAddMenu('添加子菜单', true, record.ID)">
               <template #icon>
                 <PlusOutlined />
               </template>
               添加子菜单</a-button
             >
-            <a-button type="link" @click="showAddMenu('编辑菜单', record.ID)"
+            <a-button type="link" @click="showAddMenu('编辑菜单', false, record.ID)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
             <a-button type="link"
@@ -30,7 +30,7 @@
       </template>
     </SysTable>
   </div>
-  <AddMenuModal :title="addMenuModalTitle" v-model:open="showAddModal"></AddMenuModal>
+  <AddMenuModal @getList="getList" :title="addMenuModalTitle" v-model:open="showAddModal" :isAdd="isAdd" :id="selectId"></AddMenuModal>
 </template>
 
 <script setup lang="ts">
@@ -39,7 +39,6 @@ import SysTable from '@/components/sysTable/index.vue';
 import { asyncMenuList } from '@/api/modules/menuApi';
 import { MenuDataType } from '@/types/menu';
 import AddMenuModal from './modules/addMenuModal.vue';
-import SysModal from '@/components/SysModal/index.vue';
 onMounted(() => {
   getList();
 });
@@ -47,8 +46,12 @@ onMounted(() => {
 // =========== 新增菜单 ==========
 
 const addMenuModalTitle = ref('');
+const selectId = ref(0);
+const isAdd = ref(false); //是否新增 新增父菜单选项不可选
 const showAddModal = ref(false);
-function showAddMenu(title: string, id?: string) {
+function showAddMenu(title: string, add: boolean, id?: number) {
+  isAdd.value = add;
+  selectId.value = id || 0;
   addMenuModalTitle.value = title;
   showAddModal.value = !showAddModal.value;
 }

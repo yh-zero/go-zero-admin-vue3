@@ -1,8 +1,9 @@
 import type { SelectProps } from 'ant-design-vue';
+import type { Rule } from 'ant-design-vue/es/form';
 import { reactive, ref } from 'vue';
 import { MenuDataType } from '@/types/menu';
 export const menuData = reactive<MenuDataType>({
-  parentId: '',
+  parentId: 0,
   path: '',
   name: '',
   hidden: false,
@@ -27,16 +28,6 @@ export const menuData = reactive<MenuDataType>({
 });
 
 // form
-export const selectYesNo = ref<SelectProps['options']>([
-  {
-    value: 'true',
-    label: '是',
-  },
-  {
-    value: 'false',
-    label: '否',
-  },
-]);
 
 export const selectParameters = ref<SelectProps['options']>([
   {
@@ -48,9 +39,24 @@ export const selectParameters = ref<SelectProps['options']>([
     label: 'params',
   },
 ]);
+
+// 校验表单
+export const rules: Record<string, Rule[]> = {
+  name: [{ required: true, message: '请输入路由名字', trigger: 'change' }],
+  path: [{ required: true, message: '请输入路由Path', trigger: 'change' }],
+  component: [{ required: true, message: '请输入文件路径', trigger: 'change' }],
+};
+
 // table
 export const columns = [
   { title: '参数类型', slotName: 'type', width: 200 },
   { title: '参数key', slotName: 'key', width: 200 },
   { title: '参数值', slotName: 'value', width: 200 },
+  { title: '', slotName: 'edit', width: 200 },
+];
+
+export const columnsBtn = [
+  { title: '按钮名称', slotName: 'name', width: 200 },
+  { title: '备注', slotName: 'desc', width: 200 },
+  { title: '', slotName: 'edit', width: 200 },
 ];

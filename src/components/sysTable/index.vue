@@ -1,7 +1,7 @@
 <template>
   <a-table :customRow="customRow">
-    <template #bodyCell="{ column, record }">
-      <slot name="tableSlot" :column="column" :record="record"></slot>
+    <template #bodyCell="{ text, record, index, column }">
+      <slot name="tableSlot" :text="text" :index="index" :column="column" :record="record"></slot>
     </template>
   </a-table>
 </template>

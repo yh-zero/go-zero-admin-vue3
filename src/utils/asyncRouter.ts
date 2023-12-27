@@ -19,13 +19,7 @@ export const asyncMenuToRouter = (menus: MenuRespType[]): RouterType[] => {
       componentPath: menu.component,
       path: menu.path,
       name: menu.name,
-      meta: {
-        title: menu.title,
-        keepAlive: menu.keepAlive,
-        defaultMenu: menu.defaultMenu,
-        icon: menu.icon,
-        closeTab: menu.closeTab,
-      },
+      meta: menu.meta,
       children: [],
     };
     if (menu.children) {
@@ -37,9 +31,7 @@ export const asyncMenuToRouter = (menus: MenuRespType[]): RouterType[] => {
 };
 
 // 根据接口返回的页面路径 获取对应的页面
-export const asyncRouterHandle = (
-  asyncRouter: RouterType[],
-): RouteRecordRaw[] => {
+export const asyncRouterHandle = (asyncRouter: RouterType[]): RouteRecordRaw[] => {
   const routerList: RouteRecordRaw[] = [];
   asyncRouter.forEach(item => {
     const routers: RouteRecordRaw = {
