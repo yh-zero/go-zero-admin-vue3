@@ -2,7 +2,6 @@
   <a-layout class="h-screen">
     <SysMenu></SysMenu>
     <a-layout>
-      <!-- Header -->
       <SysHeader></SysHeader>
       <SysContent></SysContent>
       <!-- <SysFooter></SysFooter> -->

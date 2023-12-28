@@ -121,26 +121,34 @@
 </template>
 
 <script setup lang="ts">
-import { useAttrs, watchEffect, ref } from 'vue';
+import { useAttrs, watchEffect, reactive, ref } from 'vue';
 import SysModal from '@/components/SysModal/index.vue';
 import { useSelectHooks } from '@/hooks/baseSelectHooks';
-import { menuData, selectParameters, columns, columnsBtn, rules } from './data';
+import { defaultMenuData, selectParameters, columns, columnsBtn, rules } from './data';
 import { addBaseMenu } from '@/api/modules/menuApi';
+import { MenuDataType } from '@/types/menu';
 const { selectYesNo, selectIcon } = useSelectHooks();
 const emits = defineEmits(['getList']);
 const attrs = useAttrs();
-
 watchEffect(() => {
   if (attrs.open) {
     initMenuData();
-    menuData.parentId = (attrs.id as number) || 0;
   }
 });
+let menuData = reactive<MenuDataType>({ ...defaultMenuData });
 // 设置默认表单
 function initMenuData() {
-  console.log('====================================');
-  console.log();
-  console.log('====================================');
+  if (attrs.selectItem) {
+    if (attrs.isAdd) {
+      const selectItem = attrs.selectItem as MenuDataType;
+      menuData = reactive<MenuDataType>({ ...defaultMenuData });
+      menuData.parentId = selectItem.ID;
+    } else {
+      menuData = attrs.selectItem as MenuDataType;
+    }
+  } else {
+    menuData = reactive<MenuDataType>({ ...defaultMenuData });
+  }
 }
 const formRef = ref();
 async function ok() {

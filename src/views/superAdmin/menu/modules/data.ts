@@ -2,7 +2,8 @@ import type { SelectProps } from 'ant-design-vue';
 import type { Rule } from 'ant-design-vue/es/form';
 import { reactive, ref } from 'vue';
 import { MenuDataType } from '@/types/menu';
-export const menuData = reactive<MenuDataType>({
+
+export const defaultMenuData: MenuDataType = {
   parentId: 0,
   path: '',
   name: '',
@@ -25,7 +26,7 @@ export const menuData = reactive<MenuDataType>({
   createdAt: '',
   UpdatedAt: '',
   DeletedAt: '',
-});
+};
 
 // form
 

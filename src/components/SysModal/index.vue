@@ -33,7 +33,7 @@ const _open = computed({
 
 function close(val: any) {
   if (props.formRef) {
-    props.formRef.clearValidate();
+    props.formRef.resetFields();
   }
   emits('update:open', val);
 }

@@ -1,7 +1,7 @@
 <template>
   <a-layout-content>
     <div class="bg-[#f5f5f5] p-[20px]">
-      <router-view v-slot="{ Component, route }">
+      <router-view v-if="sysStore.reloadFlag" v-slot="{ Component, route }">
         <KeepAlive v-if="route.meta.keepAlive">
           <component :key="route.fullPath" :is="Component"></component>
         </KeepAlive>
@@ -10,6 +10,9 @@
   ></a-layout-content>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSystemStore } from '@/store/modules/system';
+const sysStore = useSystemStore();
+</script>
 
 <style scoped></style>

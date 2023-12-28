@@ -5,11 +5,7 @@ import { MenuRespType, RouterType } from '@/types/layout';
 import { asyncMenu } from '@/api/modules/menuApi';
 import layoutRouter from '@/router/modules/layout';
 //
-import {
-  asyncRouterHandle,
-  asyncMenuToRouter,
-  setAsyncRouter,
-} from '@/utils/asyncRouter';
+import { asyncRouterHandle, asyncMenuToRouter, setAsyncRouter } from '@/utils/asyncRouter';
 
 interface LayoutType {
   isRefresh: boolean; //记录是否被刷新 被刷新了需要重新 addRoute
@@ -45,6 +41,29 @@ export const useLayoutStore = defineStore({
     async getMenu() {
       const res = await asyncMenu();
       this.menuResList = res.menus; //保存返回的数据
+      // 添加一个用于刷新的路由页面
+      this.menuResList.push({
+        path: 'reload',
+        name: 'Reload',
+        meta: {
+          title: '',
+          closeTab: true,
+          keepAlive: false,
+          defaultMenu: false,
+          icon: '',
+        },
+        component: 'views/error/reload.vue',
+        authoritys: null,
+        btns: [],
+        children: [],
+        hidden: false,
+        menuBtn: [],
+        menuId: 0,
+        parameters: [],
+        parentId: '',
+        sort: 0,
+        activeName: '',
+      });
       // 获取对应的路由
       this.setRouter();
       return true;

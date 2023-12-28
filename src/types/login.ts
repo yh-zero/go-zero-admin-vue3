@@ -14,7 +14,9 @@ export interface CaptchaType {
 export interface LoginRespType {
   accessExpire: number;
   accessToken: string;
-  theme: {
+  userInfo: {
+    userName: string;
+    nickName: string;
     bgColor: string;
     textColor: string;
   };
