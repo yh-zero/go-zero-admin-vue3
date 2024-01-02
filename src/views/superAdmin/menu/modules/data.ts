@@ -26,6 +26,7 @@ export const defaultMenuData: MenuDataType = {
   createdAt: '',
   UpdatedAt: '',
   DeletedAt: '',
+  showMenuIds: [],
 };
 
 // form

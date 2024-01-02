@@ -13,3 +13,8 @@ export const asyncMenuList = (): Promise<{ list: MenuDataType[] }> => {
 export const addBaseMenu = (data: MenuDataType): Promise<{ list: MenuDataType[] }> => {
   return http.post('/v1/sys/menu/addBaseMenu', data);
 };
+
+// 分页获取菜单[树状结构]
+export const getBaseMenuTree = (): Promise<{ list: MenuDataType[] }> => {
+  return http.get('/v1/sys/menu/getBaseMenuTree');
+};

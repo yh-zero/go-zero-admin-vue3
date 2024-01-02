@@ -3,6 +3,7 @@ export interface AuthorityType {
   authorityName: string;
   parentId: number;
   dataAuthorityId: number[];
+  showMenuIds: string;
   children: AuthorityType[] | null;
   menus: [];
   defaultRouter: string;

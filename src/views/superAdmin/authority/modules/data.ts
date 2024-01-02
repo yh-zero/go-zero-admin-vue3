@@ -13,5 +13,7 @@ export const defaultData: AuthorityType = {
 
 // 校验表单
 export const rules: Record<string, Rule[]> = {
-  name: [{ required: true, message: '请输入路由名字', trigger: 'change' }],
+  parentId: [{ required: true, message: '请选择父级角色', trigger: 'change' }],
+  authorityId: [{ required: true, message: '请输入角色ID', trigger: 'change' }],
+  authorityName: [{ required: true, message: '请输入角色姓名', trigger: 'change' }],
 };

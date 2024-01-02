@@ -29,6 +29,7 @@ export interface MenuDataType {
   menuBtn: btns[]; // 未提供menuBtn的类型信息
   meta: MetaType;
   ID: number;
+  showMenuIds: string[];
   createdAt: string;
   UpdatedAt: string;
   DeletedAt: string;

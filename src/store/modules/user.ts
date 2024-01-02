@@ -12,6 +12,15 @@ const defaultUserInfo: LoginRespType = {
     nickName: '',
     bgColor: '#001529',
     textColor: '#ffffff',
+    authority: {
+      authorityId: 0,
+      authorityName: '',
+      parentId: 0,
+      dataAuthorityId: [],
+      menus: [],
+      defaultRouter: '',
+      showMenuIds: '',
+    },
   },
 };
 type UserState = {

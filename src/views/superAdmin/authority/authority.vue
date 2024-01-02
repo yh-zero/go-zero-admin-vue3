@@ -13,7 +13,7 @@
         </template>
         <template v-if="column.slotName == 'edit'">
           <div class="w-[500px]">
-            <a-button type="link">
+            <a-button type="link" @click="openEditAuth(record)">
               <template #icon>
                 <ToolOutlined />
               </template>
@@ -41,6 +41,7 @@
     </SysTable>
   </div>
   <AddModal @getList="getList" :title="addMenuModalTitle" v-model:open="showAddModal" :isAdd="isAdd" :selectItem="selectItem"></AddModal>
+  <EditAuth :selectItem="selectItem" v-model:open="showEditAuth"></EditAuth>
 </template>
 
 <script setup lang="ts">
@@ -49,14 +50,23 @@ import SysTable from '@/components/sysTable/index.vue';
 import { getAuthorityList } from '@/api/modules/authority';
 import { AuthorityType } from '@/types/authority';
 import AddModal from './modules/addModal.vue';
+import EditAuth from './modules/editAuth/index.vue';
 onMounted(() => {
   getList();
 });
+const selectItem = ref();
 
+// 设置权限
+const showEditAuth = ref(false);
+
+function openEditAuth(auth: AuthorityType) {
+  showEditAuth.value = true;
+  selectItem.value = auth;
+}
 // =========== 新增角色 ==========
 
 const addMenuModalTitle = ref('');
-const selectItem = ref();
+
 const isAdd = ref(false); //是否新增 新增父角色选项不可选
 const showAddModal = ref(false);
 function showAddMenu(title: string, add: boolean, selectData?: AuthorityType) {

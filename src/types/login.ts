@@ -19,5 +19,17 @@ export interface LoginRespType {
     nickName: string;
     bgColor: string;
     textColor: string;
+    authority: AuthorityType;
   };
+}
+
+// 登录返回
+export interface AuthorityType {
+  authorityId: number;
+  authorityName: string;
+  parentId: 0;
+  dataAuthorityId: string[];
+  menus: string[];
+  defaultRouter: string;
+  showMenuIds: string;
 }
