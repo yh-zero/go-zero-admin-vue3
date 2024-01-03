@@ -1,9 +1,5 @@
 import { ref, computed } from 'vue';
 import { getIcon } from '@/utils/iconList';
-interface SelectType {
-  value: any;
-  label: string;
-}
 
 export const useSelectHooks = () => {
   // 是否选项
@@ -17,6 +13,7 @@ export const useSelectHooks = () => {
       label: '否',
     },
   ]);
+
   // 下拉图标列表
   const selectIcon = computed(() => {
     const list = getIcon();

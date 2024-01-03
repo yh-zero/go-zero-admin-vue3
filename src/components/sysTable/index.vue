@@ -10,7 +10,7 @@
 import { useAttrs, watchEffect, reactive } from 'vue';
 import { usePagination } from 'vue-request';
 interface Props {
-  getList: Function;
+  getList?: Function; //请求列表的方法
 }
 const props = withDefaults(defineProps<Props>(), {
   getList: (): Promise<any> => {
@@ -69,6 +69,15 @@ const handleChange = (pag: { pageSize: number; current: number }, filters: any, 
     ...filters,
   });
 };
+// 暴露重新请求
+function toGetList() {
+  run({
+    pageNo: current.value,
+    pageSize: pageSize.value,
+  });
+}
+// 主动暴露childMethod方法
+defineExpose({ toGetList });
 </script>
 <style scoped lang="scss">
 // 表头文字位置

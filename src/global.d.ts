@@ -21,4 +21,9 @@ declare global {
     UpdatedAt: string;
     DeletedAt: string;
   }
+  // 选择类型
+  interface SelectType {
+    value: any;
+    label: string;
+  }
 }

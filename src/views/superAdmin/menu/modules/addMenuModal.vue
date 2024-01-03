@@ -144,7 +144,7 @@ function initMenuData() {
       menuData = reactive<MenuDataType>({ ...defaultMenuData });
       menuData.parentId = selectItem.ID;
     } else {
-      menuData = attrs.selectItem as MenuDataType;
+      menuData = { ...(attrs.selectItem as MenuDataType) };
     }
   } else {
     menuData = reactive<MenuDataType>({ ...defaultMenuData });

@@ -6,16 +6,7 @@
       </template>
       新增根菜单</a-button
     >
-    <SysTable
-      :loading="loading"
-      :rowKey="(record:MenuDataType) => record.ID"
-      :expandedRowKeys="expandedKeys"
-      :onExpand="onExpand"
-      class="mt-3"
-      :dataSource="dataSource"
-      :pagination="false"
-      :columns="columns"
-    >
+    <SysTable :rowKey="(record:MenuDataType) => record.ID" :expandedRowKeys="expandedKeys" :onExpand="onExpand" class="mt-3" :dataSource="dataSource" :pagination="false" :columns="columns">
       <template #tableSlot="{ column, record }">
         <template v-if="column.slotName == 'icon'">
           <component :is="record.meta.icon"></component>
@@ -66,11 +57,9 @@ function showAddMenu(title: string, add: boolean, selectData?: MenuDataType) {
 }
 
 //=========== 表格 ===============
-const loading = ref(false);
+
 async function getList() {
-  loading.value = true;
   const res = await asyncMenuList();
-  loading.value = false;
   dataSource.value = res.list;
   removeChildren(dataSource.value);
 }

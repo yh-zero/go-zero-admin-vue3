@@ -41,7 +41,7 @@ function initauthData() {
       authData = reactive<AuthorityType>({ ...defaultData });
       authData.parentId = selectItem.authorityId;
     } else {
-      authData = attrs.selectItem as AuthorityType;
+      authData = { ...(attrs.selectItem as AuthorityType) };
     }
   } else {
     authData = reactive<AuthorityType>({ ...defaultData });

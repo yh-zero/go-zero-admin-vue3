@@ -6,7 +6,16 @@
       </template>
       新增根角色</a-button
     >
-    <SysTable :rowKey="(record:AuthorityType) => record.authorityId" :expandedRowKeys="expandedKeys" :onExpand="onExpand" class="mt-3" :dataSource="dataSource" :pagination="false" :columns="columns">
+    <SysTable
+      :loading="loading"
+      :rowKey="(record:AuthorityType) => record.authorityId"
+      :expandedRowKeys="expandedKeys"
+      :onExpand="onExpand"
+      class="mt-3"
+      :dataSource="dataSource"
+      :pagination="false"
+      :columns="columns"
+    >
       <template #tableSlot="{ column, record }">
         <template v-if="column.slotName == 'icon'">
           <component :is="record.meta.icon"></component>
@@ -77,9 +86,12 @@ function showAddMenu(title: string, add: boolean, selectData?: AuthorityType) {
 }
 
 //=========== 表格 ===============
+const loading = ref(false);
 const expandedKeys = ref<number[]>([]); // 存储展开的节点的 key
 async function getList() {
+  loading.value = true;
   const res = await getAuthorityList();
+  loading.value = false;
   dataSource.value = res.list;
   removeChildren(dataSource.value);
 }

@@ -6,3 +6,15 @@ export interface ApiListRespType {
   method: string; //'GET';
   ID: number;
 }
+export enum ApiMethodEnum {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+}
+export interface ApiType {
+  path: string;
+  apiGroup: string;
+  method: keyof typeof ApiMethodEnum;
+  description: string;
+}
