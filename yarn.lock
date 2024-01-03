@@ -9092,6 +9092,11 @@ vue-demi@*, vue-demi@^0.13.6:
   resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
   integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
+vue-demi@latest:
+  version "0.14.6"
+  resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.6.tgz#dc706582851dc1cdc17a0054f4fec2eb6df74c92"
+  integrity sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==
+
 vue-eslint-parser@^8.0.0:
   version "8.3.0"
   resolved "https://registry.npmmirror.com/vue-eslint-parser/-/vue-eslint-parser-8.3.0.tgz#5d31129a1b3dd89c0069ca0a1c88f970c360bd0d"
@@ -9136,6 +9141,13 @@ vue-loader@^17.0.0:
     chalk "^4.1.0"
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
+
+vue-request@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmmirror.com/vue-request/-/vue-request-2.0.4.tgz#484672c36f46930437fe9415cc40f2fd595f98d3"
+  integrity sha512-+Tu5rDy6ItF9UdD21Mmbjiq5Pq6NZSN9juH72hNQTMn1whHh4KZPTKWVLK2YS4nzbuEnPs+82G91AA2Fgd93mg==
+  dependencies:
+    vue-demi latest
 
 vue-router@^4.0.3:
   version "4.1.6"

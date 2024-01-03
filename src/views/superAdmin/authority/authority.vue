@@ -41,7 +41,7 @@
     </SysTable>
   </div>
   <AddModal @getList="getList" :title="addMenuModalTitle" v-model:open="showAddModal" :isAdd="isAdd" :selectItem="selectItem"></AddModal>
-  <EditAuth :selectItem="selectItem" v-model:open="showEditAuth"></EditAuth>
+  <EditAuth @getList="getList" :selectItem="selectItem" v-model:open="showEditAuth"></EditAuth>
 </template>
 
 <script setup lang="ts">

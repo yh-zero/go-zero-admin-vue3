@@ -3,10 +3,10 @@
     <div class="w-full h-[100%] border-solid border-[1px] border-[#dcdfe6]">
       <a-tabs v-model="activeKey" type="card">
         <a-tab-pane key="1" tab="角色菜单" class="p-2">
-          <AuthList :defaultRouter="selectAuth.defaultRouter" :showMenuIds="selectAuth.showMenuIds"></AuthList>
+          <AuthList v-if="attrs.open" :auth="selectAuth"></AuthList>
         </a-tab-pane>
         <a-tab-pane key="2" tab="角色API" class="p-2">
-          <AuthApi></AuthApi>
+          <AuthApi v-if="attrs.open"></AuthApi>
         </a-tab-pane>
         <a-tab-pane key="3" tab="资源权限"></a-tab-pane>
       </a-tabs>
@@ -21,9 +21,12 @@ import AuthApi from './authApi.vue';
 import { defaultData } from '../data';
 import { AuthorityType } from '@/types/authority';
 const attrs = useAttrs();
+const emits = defineEmits(['getList']);
 watchEffect(() => {
   if (attrs.open) {
     initAuthData();
+  } else {
+    emits('getList');
   }
 });
 let selectAuth = reactive<AuthorityType>({ ...defaultData });

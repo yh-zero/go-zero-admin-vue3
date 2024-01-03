@@ -1,15 +1,11 @@
 import axios from './http';
 import NProgress from 'nprogress';
 NProgress.configure({ showSpinner: false });
-export type SafeResponseType<T> = {
-  success: boolean;
-  data: T;
-  errorCode: Error | null;
-  message: any;
-};
+
 interface Http {
   get<T>(url: string, params?: unknown): Promise<any>;
   post<T>(url: string, params?: unknown): Promise<any>;
+  put<T>(url: string, params?: unknown): Promise<any>;
   upload<T>(url: string, params: unknown): Promise<any>;
   download(url: string): void;
 }
@@ -35,6 +31,21 @@ const http: Http = {
       NProgress.start();
       axios
         .post(url, JSON.stringify(params))
+        .then(res => {
+          NProgress.done();
+          resolve(res);
+        })
+        .catch(err => {
+          NProgress.done();
+          reject(err);
+        });
+    });
+  },
+  put(url, params) {
+    return new Promise((resolve, reject) => {
+      NProgress.start();
+      axios
+        .put(url, JSON.stringify(params))
         .then(res => {
           NProgress.done();
           resolve(res);

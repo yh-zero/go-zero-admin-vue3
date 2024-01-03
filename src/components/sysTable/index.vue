@@ -1,5 +1,5 @@
 <template>
-  <a-table :customRow="customRow">
+  <a-table :loading="loading" @change="handleChange" :pagination="pagination" :customRow="customRow">
     <template #bodyCell="{ text, record, index, column }">
       <slot name="tableSlot" :text="text" :index="index" :column="column" :record="record"></slot>
     </template>
@@ -7,13 +7,67 @@
 </template>
 
 <script setup lang="ts">
-import { useAttrs } from 'vue';
-const attrs = useAttrs();
+import { useAttrs, watchEffect, reactive } from 'vue';
+import { usePagination } from 'vue-request';
+interface Props {
+  getList: Function;
+}
+const props = withDefaults(defineProps<Props>(), {
+  getList: (): Promise<any> => {
+    return Promise.resolve();
+  },
+});
 
+const emits = defineEmits(['update:data']);
+
+const attrs = useAttrs();
 const customRow = () => {
   return {
     // align: 'center',
   };
+};
+
+// =========== 分页处理 ===========
+const {
+  data: _data,
+  run,
+  loading,
+  current,
+  pageSize,
+  total,
+  changePageSize,
+} = usePagination(props.getList as any, {
+  pagination: {
+    currentKey: 'pageNo',
+    pageSizeKey: 'pageSize',
+    totalKey: 'total',
+  },
+});
+watchEffect(() => {
+  const data = _data as any;
+  if (data) {
+    emits('update:data', data.value?.list);
+  }
+});
+const pagination = reactive({
+  total: total.value,
+  current: current.value,
+  pageSize: pageSize.value,
+});
+watchEffect(() => {
+  pagination.total = total.value;
+  pagination.current = current.value;
+  pagination.pageSize = pageSize.value;
+});
+
+const handleChange = (pag: { pageSize: number; current: number }, filters: any, sorter: any) => {
+  run({
+    pageSize: pag.pageSize,
+    pageNo: pag?.current,
+    sortField: sorter.field,
+    sortOrder: sorter.order,
+    ...filters,
+  });
 };
 </script>
 <style scoped lang="scss">
