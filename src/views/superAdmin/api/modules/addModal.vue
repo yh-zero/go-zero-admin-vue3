@@ -1,5 +1,5 @@
 <template>
-  <SysModal width="800px" @ok="ok" :formRef="formRef">
+  <SysModal width="800px" @ok="ok">
     <div class="flex items-center w-full bg-[#fffae6] p-2">
       <div class="bg-[#f08c0e] w-[12px] h-[12px] flex justify-center items-center rounded-full text-xs text-white mr-1">!</div>
       <span class="text-[#f08c0e] text-xs"> 新增API，需要在角色管理内配置权限才可使用</span>
@@ -25,10 +25,9 @@
 
 <script setup lang="ts">
 import { useAttrs, watchEffect, reactive, ref } from 'vue';
-import SysModal from '@/components/SysModal/index.vue';
+import SysModal from '@/components/sysModal/index.vue';
 import { defaultData, rules, selectMethods } from './data';
-import { addBaseMenu } from '@/api/modules/menuApi';
-import { ApiType } from '@/types/api';
+import { ApiListRespType } from '@/types/api';
 
 const emits = defineEmits(['getList']);
 const attrs = useAttrs();
@@ -37,26 +36,16 @@ watchEffect(() => {
     initApiData();
   }
 });
-let ApiData = reactive<ApiType>({ ...defaultData });
+let ApiData = reactive<ApiListRespType>({ ...defaultData });
 // 设置默认表单
 function initApiData() {
-  if (attrs.selectItem) {
-    if (attrs.isAdd) {
-      const selectItem = attrs.selectItem as ApiType;
-      ApiData = reactive<ApiType>({ ...defaultData });
-      ApiData.parentId = selectItem.authorityId;
-    } else {
-      ApiData = { ...(attrs.selectItem as ApiType) };
-    }
-  } else {
-    ApiData = reactive<ApiType>({ ...defaultData });
-  }
+  ApiData = { ...(attrs.selectItem as ApiListRespType) };
 }
+
 const formRef = ref();
 async function ok() {
   emits('getList');
 }
-
 //
 function finishFailed({ values, errorFields, outOfDate }: any) {
   // message.error('请完善表单信息');

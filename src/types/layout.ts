@@ -5,7 +5,7 @@ export interface MenuRespType {
   btns: {};
   children: MenuRespType[];
   component: string; //页面路径
-  hidden: false; //是否在列表隐藏
+  hidden: boolean; //是否在列表隐藏
   menuBtn: MenuBtnType[]; //
   menuId: number;
   name: string; //路由name
@@ -41,5 +41,6 @@ interface ParametersType {
 export interface RouterType extends _RouteRecordBase {
   componentPath: string; //页面路径 //'view/layout/index.vue'
   meta: MateType;
+  hidden: boolean;
   children: RouterType[];
 }

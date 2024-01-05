@@ -19,6 +19,7 @@ export const asyncMenuToRouter = (menus: MenuRespType[]): RouterType[] => {
       componentPath: menu.component,
       path: menu.path,
       name: menu.name,
+      hidden: menu.hidden,
       meta: menu.meta,
       children: [],
     };

@@ -1,5 +1,5 @@
 <template>
-  <template v-for="(item, index) in menuList">
+  <template v-for="(item, index) in showMenuList">
     <a-sub-menu v-if="item.children && item.children.length > 0" :key="item.path" :index="item.path">
       <template #title>
         <component :is="item.meta?.icon"></component>
@@ -16,12 +16,19 @@
 </template>
 
 <script setup lang="ts">
-import type { RouteRecordRaw } from 'vue-router';
+import { RouterType } from '@/types/layout';
 import router from '@/router';
+import { onMounted, ref } from 'vue';
 
 // 参数
-defineProps<{ menuList: RouteRecordRaw[] }>();
-function toPage(page: RouteRecordRaw) {
+const props = defineProps<{ menuList: RouterType[] }>();
+const showMenuList = ref<RouterType[]>([]);
+onMounted(() => {
+  showMenuList.value = props.menuList.filter(res => {
+    if (!res.hidden) return res;
+  });
+});
+function toPage(page: RouterType) {
   if (page.name) {
     router.push({ name: page.name });
   } else {

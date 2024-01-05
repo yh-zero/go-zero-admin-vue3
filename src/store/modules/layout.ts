@@ -56,7 +56,7 @@ export const useLayoutStore = defineStore({
         authoritys: null,
         btns: [],
         children: [],
-        hidden: false,
+        hidden: true,
         menuBtn: [],
         menuId: 0,
         parameters: [],

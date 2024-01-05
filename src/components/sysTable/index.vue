@@ -7,15 +7,17 @@
 </template>
 
 <script setup lang="ts">
-import { useAttrs, watchEffect, reactive } from 'vue';
+import { useAttrs, watchEffect, reactive, onMounted } from 'vue';
 import { usePagination } from 'vue-request';
 interface Props {
   getList?: Function; //请求列表的方法
+  pageSize?: number; //每页显示条数
 }
 const props = withDefaults(defineProps<Props>(), {
   getList: (): Promise<any> => {
     return Promise.resolve();
   },
+  pageSize: 10,
 });
 
 const emits = defineEmits(['update:data']);
@@ -28,6 +30,14 @@ const customRow = () => {
 };
 
 // =========== 分页处理 ===========
+onMounted(() => {
+  if (attrs.pagination == false) {
+    changePageSize(999999999);
+  } else if (props.pageSize) {
+    changePageSize(props.pageSize);
+  }
+});
+
 const {
   data: _data,
   run,
@@ -37,6 +47,7 @@ const {
   total,
   changePageSize,
 } = usePagination(props.getList as any, {
+  manual: true,
   pagination: {
     currentKey: 'pageNo',
     pageSizeKey: 'pageSize',
@@ -66,14 +77,17 @@ const handleChange = (pag: { pageSize: number; current: number }, filters: any, 
     pageNo: pag?.current,
     sortField: sorter.field,
     sortOrder: sorter.order,
+    a: 'asdasd',
+
     ...filters,
   });
 };
 // 暴露重新请求
-function toGetList() {
+function toGetList(searchData = {}) {
   run({
     pageNo: current.value,
     pageSize: pageSize.value,
+    ...searchData,
   });
 }
 // 主动暴露childMethod方法

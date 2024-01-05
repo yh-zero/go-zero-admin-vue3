@@ -10,3 +10,7 @@ export const createApi = (data: IProgressReq & { path: string }): Promise<IProgr
 export const getApiList = (data: IProgressReq & { path: string }): Promise<IProgressResp<ApiListRespType>> => {
   return http.get('/v1/sys/api/getApiList', data);
 };
+// 删除
+export const deleteApi = (data: IProgressReq & { path: string }): Promise<IProgressResp<ApiListRespType>> => {
+  return http.post('/v1/sys/api/deleteApi', data);
+};

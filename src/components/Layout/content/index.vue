@@ -1,6 +1,6 @@
 <template>
   <a-layout-content>
-    <div class="bg-[#f5f5f5] p-[20px]">
+    <div class="bg-[#f5f5f5] p-[20px] h-full overflow-auto">
       <router-view v-if="sysStore.reloadFlag" v-slot="{ Component, route }">
         <KeepAlive v-if="route.meta.keepAlive">
           <component :key="route.fullPath" :is="Component"></component>
