@@ -6,6 +6,7 @@ import { message } from 'ant-design-vue';
 // 设置请求头和请求路径
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 axios.defaults.headers.put['Content-Type'] = 'application/json;charset=UTF-8';
+axios.defaults.headers.delete['Content-Type'] = 'application/json;charset=UTF-8';
 const instance = axios.create({
   baseURL: mode.IS_DEV ? '/' : baseUrl,
   timeout: 10000,
@@ -40,8 +41,13 @@ instance.interceptors.response.use(({ data }): any => {
     toMessage('登录过期,请重新登录');
     return Promise.reject(data.message);
   } else {
-    toMessage(data?.result.message);
-    return Promise.reject(data.message);
+    if (data.result.message) {
+      toMessage(data?.result.message);
+      return Promise.reject(data.message);
+    } else {
+      toMessage('系统错误，请联系管理员,' + data.message);
+      return Promise.reject(data.message);
+    }
   }
 });
 

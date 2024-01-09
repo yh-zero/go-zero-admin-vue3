@@ -92,8 +92,8 @@ const onSelectChange = (_selectedRowKeys: string[]) => {
 };
 
 // 删除
-function removeByIds(ids: string[]) {
-  deleteApisByIds(ids);
+async function removeByIds(ids: string[]) {
+  await deleteApisByIds(ids);
   getList();
 }
 </script>

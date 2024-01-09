@@ -20,3 +20,7 @@
 .ant-switch {
   background-color: #bfbfbf;
 }
+/* 左侧导航栏 */
+.ant-menu-title-content {
+  flex: none !important;
+}
