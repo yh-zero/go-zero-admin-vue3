@@ -41,7 +41,7 @@
             <a-button type="link" @click="showAddMenu('编辑角色', false, record)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
-            <a-button type="link"
+            <a-button type="link" @click="removeOne(record.authorityId)"
               ><template #icon> <DeleteOutlined /> </template>删除</a-button
             >
           </div>
@@ -49,7 +49,7 @@
       </template>
     </SysTable>
   </div>
-  <AddModal @getList="getList" :title="addMenuModalTitle" v-model:open="showAddModal" :isAdd="isAdd" :selectItem="selectItem"></AddModal>
+  <AddModal :dataSource="dataSource" @getList="getList" :title="addMenuModalTitle" v-model:open="showAddModal" :isAdd="isAdd" :selectItem="selectItem"></AddModal>
   <EditAuth @getList="getList" :selectItem="selectItem" v-model:open="showEditAuth"></EditAuth>
 </template>
 
@@ -85,6 +85,12 @@ function showAddMenu(title: string, add: boolean, selectData?: AuthorityType) {
   showAddModal.value = !showAddModal.value;
 }
 
+//=========== 删除 ===============
+function removeOne(id: number) {
+  console.log('====================================');
+  console.log(id);
+  console.log('====================================');
+}
 //=========== 表格 ===============
 const loading = ref(false);
 const expandedKeys = ref<number[]>([]); // 存储展开的节点的 key

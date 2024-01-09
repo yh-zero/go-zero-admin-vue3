@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   okText: '确定',
   cancelText: '取消',
 });
-const emits = defineEmits(['update:open', 'ok', 'cancel']);
+const emits = defineEmits(['update:open', 'callBackOk', 'cancel']);
 
 const _open = computed({
   get: () => {
@@ -42,11 +42,13 @@ function close(val: any) {
 async function handleOK() {
   if (props.formRef) {
     await props.formRef.validate();
+    emits('callBackOk');
     props.formRef.clearValidate();
     close(false);
+    return;
   }
+  emits('callBackOk');
   close(false);
-  emits('ok');
 }
 </script>
 

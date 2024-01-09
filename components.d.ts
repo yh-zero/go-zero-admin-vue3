@@ -38,6 +38,7 @@ declare module 'vue' {
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     ATree: typeof import('ant-design-vue/es')['Tree']
     ATreeSelect: typeof import('ant-design-vue/es')['TreeSelect']
+    AUpload: typeof import('ant-design-vue/es')['Upload']
     Breadcrumb: typeof import('./src/components/Layout/header/modules/breadcrumb.vue')['default']
     Buoy: typeof import('./src/components/widget/Buoy.vue')['default']
     Content: typeof import('./src/components/Layout/content/index.vue')['default']
@@ -55,7 +56,10 @@ declare module 'vue' {
     SysSearch: typeof import('./src/components/sysSearch/index.vue')['default']
     SysTable: typeof import('./src/components/sysTable/index.vue')['default']
     SysTools: typeof import('./src/components/Layout/header/modules/sysTools/index.vue')['default']
+    SysUpload: typeof import('./src/components/sysUpload/index.vue')['default']
     Tabs: typeof import('./src/components/Layout/header/modules/tabs.vue')['default']
+    Upload: typeof import('./src/components/Upload/index.vue')['default']
+    UploadBtn: typeof import('./src/components/Upload/uploadBtn.vue')['default']
     UserTools: typeof import('./src/components/Layout/header/modules/userTools.vue')['default']
   }
 }

@@ -41,11 +41,11 @@ instance.interceptors.response.use(({ data }): any => {
     toMessage('登录过期,请重新登录');
     return Promise.reject(data.message);
   } else {
-    if (data.result.message) {
+    if (data.result && data.result.message) {
       toMessage(data?.result.message);
       return Promise.reject(data.message);
     } else {
-      toMessage('系统错误，请联系管理员,' + data.message);
+      toMessage(data.message + '请联系管理员!');
       return Promise.reject(data.message);
     }
   }

@@ -14,3 +14,7 @@ export const addAuthorityMenu = (data: AuthorityMenuRespType) => {
 export const updateAuthority = (data: AuthorityType) => {
   return http.put('/v1/sys/authority/updateAuthority', data);
 };
+// 创建角色信息
+export const createAuthority = (data: AuthorityType) => {
+  return http.post('/v1/sys/authority/createAuthority', data);
+};

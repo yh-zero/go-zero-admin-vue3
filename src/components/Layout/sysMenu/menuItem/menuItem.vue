@@ -9,6 +9,7 @@
     </a-sub-menu>
     <a-menu-item v-else :key="item.path + index" :index="item.path" @click="toPage(item)">
       <component :is="item.meta?.icon"></component>
+
       <span> {{ item.meta?.title }}</span>
     </a-menu-item>
   </template>
