@@ -21,7 +21,9 @@ export const routerBeforeEach = (router: Router) => {
     } else {
       if (!layoutStore.isRefresh) {
         // 刷新
+        await layoutStore.getMenu();
         await layoutStore.setRouter();
+        userStore.setColor();
         return { ...to, replace: true };
       }
       //不存在白名单 查看是否存在token

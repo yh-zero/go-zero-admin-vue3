@@ -1,5 +1,5 @@
 <template>
-  <SysModal width="800px" @ok="ok" :formRef="formRef">
+  <SysModal width="800px" @ok="callBackOk" :formRef="formRef">
     <div class="flex items-center w-full bg-[#fffae6] p-2">
       <div class="bg-[#f08c0e] w-[12px] h-[12px] flex justify-center items-center rounded-full text-xs text-white mr-1">!</div>
       <span class="text-[#f08c0e] text-xs"> 新增API，需要在角色管理内配置权限才可使用</span>
@@ -28,7 +28,7 @@ import { useAttrs, watchEffect, reactive, ref } from 'vue';
 import SysModal from '@/components/sysModal/index.vue';
 import { defaultData, rules, selectMethods } from './data';
 import { ApiListRespType } from '@/types/api';
-
+import { createApi, updateApi } from '@/api/modules/api';
 const emits = defineEmits(['getList']);
 const attrs = useAttrs();
 watchEffect(() => {
@@ -43,7 +43,12 @@ function initApiData() {
 }
 
 const formRef = ref();
-async function ok() {
+async function callBackOk() {
+  if (attrs.isAdd) {
+    await createApi(ApiData);
+  } else {
+    await updateApi(ApiData);
+  }
   emits('getList');
 }
 //

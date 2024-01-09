@@ -1,5 +1,5 @@
 <template>
-  <SysModal width="1080px" @ok="ok" :formRef="formRef">
+  <SysModal width="1080px" @ok="callBackOk" :formRef="formRef">
     <div class="pt-[20px]">
       <div class="flex items-center w-full bg-[#fffae6] p-2">
         <div class="bg-[#f08c0e] w-[12px] h-[12px] flex justify-center items-center rounded-full text-xs text-white mr-1">!</div>
@@ -122,10 +122,10 @@
 
 <script setup lang="ts">
 import { useAttrs, watchEffect, reactive, ref } from 'vue';
-import SysModal from '@/components/SysModal/index.vue';
+import SysModal from '@/components/sysModal/index.vue';
 import { useSelectHooks } from '@/hooks/baseSelectHooks';
 import { defaultMenuData, selectParameters, columns, columnsBtn, rules } from './data';
-import { addBaseMenu } from '@/api/modules/menuApi';
+import { addBaseMenu, updateBaseMenu } from '@/api/modules/menuApi';
 import { MenuDataType } from '@/types/menu';
 const { selectYesNo, selectIcon } = useSelectHooks();
 const emits = defineEmits(['getList']);
@@ -151,8 +151,12 @@ function initMenuData() {
   }
 }
 const formRef = ref();
-async function ok() {
-  await addBaseMenu(menuData);
+async function callBackOk() {
+  if (attrs.isAdd) {
+    await addBaseMenu(menuData);
+  } else {
+    await updateBaseMenu(menuData);
+  }
   emits('getList');
 }
 function addParamaters() {

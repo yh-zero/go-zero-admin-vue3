@@ -3,7 +3,11 @@ import { ApiListRespType } from '@/types/api';
 
 // 新增APi
 export const createApi = (data: ApiListRespType): Promise<string> => {
-  return http.get('/v1/sys/api/createApi', data);
+  return http.post('/v1/sys/api/createApi', data);
+};
+// 编辑
+export const updateApi = (data: ApiListRespType): Promise<string> => {
+  return http.put('/v1/sys/api/updateApi', data);
 };
 
 // 获取api列表
@@ -16,7 +20,7 @@ export const getAllApiList = (): Promise<{ apiList: ApiListRespType[] }> => {
 };
 // 删除
 export const deleteApi = (data: { ids: string[] }): Promise<string> => {
-  return http.post('/v1/sys/api/deleteApi', data);
+  return http.delete('/v1/sys/api/deleteApi', data);
 };
 
 // 批删除

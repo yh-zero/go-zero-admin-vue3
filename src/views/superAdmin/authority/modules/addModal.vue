@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { useAttrs, watchEffect, reactive, ref } from 'vue';
-import SysModal from '@/components/SysModal/index.vue';
+import SysModal from '@/components/sysModal/index.vue';
 import { useSelectHooks } from '@/hooks/baseSelectHooks';
 import { defaultData, rules } from './data';
 import { createAuthority, updateAuthority } from '@/api/modules/authority';

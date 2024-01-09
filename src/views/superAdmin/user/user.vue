@@ -43,9 +43,7 @@
             <a-button type="link" @click="showAddApi('编辑', false, record)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
-            <a-button type="link"
-              ><template #icon> <DeleteOutlined /> </template>删除</a-button
-            >
+            <SysRemoveBtn @handlerOK="removeByIds(record.ID)"></SysRemoveBtn>
           </div>
         </template>
       </template>
@@ -80,6 +78,12 @@ function showAddApi(_title: string, _isAdd: boolean, selectData?: UserListType) 
   showAddModal.value = true;
   isAdd.value = _isAdd;
   title.value = _title;
+}
+//========= 删除 =
+async function removeByIds(id: string) {
+  console.log('====================================');
+  console.log(id);
+  console.log('====================================');
 }
 // ============= 列表接口数据 =============
 const dataSource = ref();

@@ -36,14 +36,12 @@
             >
 
             <a-button type="link">
-              <template #icon> <CopyOutlined /></template>编辑</a-button
+              <template #icon> <CopyOutlined /></template>复制</a-button
             >
             <a-button type="link" @click="showAddMenu('编辑角色', false, record)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
-            <a-button type="link" @click="removeOne(record.authorityId)"
-              ><template #icon> <DeleteOutlined /> </template>删除</a-button
-            >
+            <SysRemoveBtn @handlerOK="removeOne(record.authorityId)"></SysRemoveBtn>
           </div>
         </template>
       </template>

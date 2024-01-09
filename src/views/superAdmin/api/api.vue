@@ -11,9 +11,8 @@
     <a-button type="primary" @click="showAddApi('添加API', true)"
       ><template #icon> <PlusOutlined /> </template>添加</a-button
     >
-    <a-button @click="removeByIds(selectedRowKeys)" class="ml-3" :disabled="selectedRowKeys.length <= 0"
-      ><template #icon> <DeleteOutlined /> </template>删除</a-button
-    >
+    <SysRemoveBtn :disabled="selectedRowKeys.length <= 0" @handlerOK="removeByIds(selectedRowKeys)"></SysRemoveBtn>
+
     <SysTable
       rowKey="ID"
       :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
@@ -33,9 +32,7 @@
             <a-button type="link" @click="showAddApi('编辑', false, record)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
-            <a-button type="link" @click="removeByIds([record.ID])"
-              ><template #icon> <DeleteOutlined /> </template>删除</a-button
-            >
+            <SysRemoveBtn @handlerOK="removeByIds([record.ID])"></SysRemoveBtn>
           </div>
         </template>
       </template>

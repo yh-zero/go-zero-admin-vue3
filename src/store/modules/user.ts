@@ -62,7 +62,7 @@ export const useUserStore = defineStore({
     setColor() {
       // 设置颜色
       checkThemebg(this.loginResp.userInfo.activeColor);
-      checkTextColor(this.loginResp.userInfo.textColor);
+      checkTextColor(this.loginResp.userInfo.baseColor);
     },
   },
   persist: true,

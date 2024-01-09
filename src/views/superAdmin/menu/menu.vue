@@ -31,9 +31,7 @@
             <a-button type="link" @click="showAddMenu('编辑菜单', false, record)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
-            <a-button type="link"
-              ><template #icon> <DeleteOutlined /> </template>删除</a-button
-            >
+            <SysRemoveBtn @handlerOK="removeOne(record.ID)"></SysRemoveBtn>
           </div>
         </template>
       </template>
@@ -45,9 +43,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import SysTable from '@/components/sysTable/index.vue';
-import { asyncMenuList } from '@/api/modules/menuApi';
+import { asyncMenuList, deleteBaseMenu } from '@/api/modules/menuApi';
 import { MenuDataType } from '@/types/menu';
 import AddMenuModal from './modules/addMenuModal.vue';
+import { message } from 'ant-design-vue';
 onMounted(() => {
   getList();
 });
@@ -64,7 +63,12 @@ function showAddMenu(title: string, add: boolean, selectData?: MenuDataType) {
   addMenuModalTitle.value = title;
   showAddModal.value = !showAddModal.value;
 }
-
+//=========== 删除 ===============
+async function removeOne(id: number) {
+  await deleteBaseMenu({ id });
+  message.success('删除成功');
+  getList();
+}
 //=========== 表格 ===============
 const loading = ref(false);
 async function getList() {
