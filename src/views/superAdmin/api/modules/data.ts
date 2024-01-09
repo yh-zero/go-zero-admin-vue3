@@ -1,11 +1,12 @@
 import type { Rule } from 'ant-design-vue/es/form';
-import { ApiType, ApiMethodEnum } from '@/types/api';
+import { ApiListRespType, ApiMethodEnum } from '@/types/api';
 import { ref } from 'vue';
-export const defaultData: ApiType = {
+export const defaultData: ApiListRespType = {
   path: '',
   apiGroup: '',
   method: 'GET',
   description: '',
+  ID: 0,
 };
 
 // 是否选项

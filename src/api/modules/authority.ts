@@ -2,8 +2,8 @@ import http from '../request';
 import { MenuRespType } from '@/types/layout';
 import { AuthorityType, AuthorityMenuRespType } from '@/types/authority';
 // 获取角色列表
-export const getAuthorityList = (): Promise<{ list: AuthorityType[] }> => {
-  return http.get('/v1/sys/authority/getAuthorityList');
+export const getAuthorityList = (data: IProgressReq): Promise<{ list: AuthorityType[] }> => {
+  return http.get('/v1/sys/authority/getAuthorityList', data);
 };
 // 角色绑定菜单
 export const addAuthorityMenu = (data: AuthorityMenuRespType) => {

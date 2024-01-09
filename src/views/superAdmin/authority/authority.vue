@@ -90,7 +90,10 @@ const loading = ref(false);
 const expandedKeys = ref<number[]>([]); // 存储展开的节点的 key
 async function getList() {
   loading.value = true;
-  const res = await getAuthorityList();
+  const res = await getAuthorityList({
+    pageNo: 1,
+    pageSize: 99999,
+  });
   loading.value = false;
   dataSource.value = res.list;
   removeChildren(dataSource.value);

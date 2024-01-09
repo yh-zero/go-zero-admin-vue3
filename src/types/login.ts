@@ -17,7 +17,8 @@ export interface LoginRespType {
   userInfo: {
     userName: string;
     nickName: string;
-    bgColor: string;
+    baseColor: string;
+    activeColor: string;
     textColor: string;
     authority: AuthorityType;
   };
@@ -32,4 +33,5 @@ export interface AuthorityType {
   menus: string[];
   defaultRouter: string;
   showMenuIds: string;
+  children: AuthorityType[];
 }

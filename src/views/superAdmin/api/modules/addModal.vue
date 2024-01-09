@@ -1,5 +1,5 @@
 <template>
-  <SysModal width="800px" @ok="ok">
+  <SysModal width="800px" @ok="ok" :formRef="formRef">
     <div class="flex items-center w-full bg-[#fffae6] p-2">
       <div class="bg-[#f08c0e] w-[12px] h-[12px] flex justify-center items-center rounded-full text-xs text-white mr-1">!</div>
       <span class="text-[#f08c0e] text-xs"> 新增API，需要在角色管理内配置权限才可使用</span>

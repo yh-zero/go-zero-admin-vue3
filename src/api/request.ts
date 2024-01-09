@@ -6,6 +6,7 @@ interface Http {
   get<T>(url: string, params?: unknown): Promise<any>;
   post<T>(url: string, params?: unknown): Promise<any>;
   put<T>(url: string, params?: unknown): Promise<any>;
+  delete<T>(url: string, params?: unknown): Promise<any>;
   upload<T>(url: string, params: unknown): Promise<any>;
   download(url: string): void;
 }
@@ -46,6 +47,21 @@ const http: Http = {
       NProgress.start();
       axios
         .put(url, JSON.stringify(params))
+        .then(res => {
+          NProgress.done();
+          resolve(res);
+        })
+        .catch(err => {
+          NProgress.done();
+          reject(err);
+        });
+    });
+  },
+  delete(url, params) {
+    return new Promise((resolve, reject) => {
+      NProgress.start();
+      axios
+        .delete(url, { params })
         .then(res => {
           NProgress.done();
           resolve(res);

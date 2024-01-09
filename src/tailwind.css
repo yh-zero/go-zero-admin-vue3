@@ -17,3 +17,6 @@
 .theme-nord {
   --color-primary: 94 129 172;
 }
+.ant-switch {
+  background-color: #bfbfbf;
+}

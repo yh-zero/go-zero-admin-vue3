@@ -42,12 +42,7 @@
 
 /*渐变(方向,颜色1,颜色2,颜色3）*/
 // 使用 @include linear-gradient(right, green, red, blue);
-@mixin linear-gradient(
-  $direction: bottom,
-  $color1: transparent,
-  $color2: #306eff,
-  $color3: transparent
-) {
+@mixin linear-gradient($direction: bottom, $color1: transparent, $color2: #306eff, $color3: transparent) {
   //background: -webkit-linear-gradient($direction,$colorTop, $colorCenter, $colorBottom); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient($direction, $color1, $color2, $color3);
   /* Opera 11.1 - 12.0 */
@@ -58,12 +53,7 @@
 }
 /*渐变(角度,颜色1,颜色2,颜色3）*/
 // 使用 @include linear-gradient(90edg, green, red, blue);
-@mixin linear-gradient-edg(
-  $edg: 0edg,
-  $color1: transparent,
-  $color2: #306eff,
-  $color3: transparent
-) {
+@mixin linear-gradient-edg($edg: 0edg, $color1: transparent, $color2: #306eff, $color3: transparent) {
   //background: -webkit-linear-gradient($direction,$colorTop, $colorCenter, $colorBottom); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient($edg, $color1, $color2, $color3);
   /* Opera 11.1 - 12.0 */
@@ -74,14 +64,7 @@
 }
 
 /* 定义滚动条样式 圆角和阴影不需要则传入null */
-@mixin scrollBar(
-  $width: 10px,
-  $height: 10px,
-  $outColor: $bgColor,
-  $innerColor: $bgGrey,
-  $radius: 5px,
-  $shadow: null
-) {
+@mixin scrollBar($width: 10px, $height: 10px, $outColor: $baseColor, $innerColor: $bgGrey, $radius: 5px, $shadow: null) {
   /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
   &::-webkit-scrollbar {
     width: $width;

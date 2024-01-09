@@ -11,6 +11,7 @@ import { useAttrs, watchEffect, reactive, onMounted } from 'vue';
 import { usePagination } from 'vue-request';
 interface Props {
   getList?: Function; //请求列表的方法
+  asyncListCallback?: Function; //更新列表回调
   pageSize?: number; //每页显示条数
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -56,8 +57,11 @@ const {
 });
 watchEffect(() => {
   const data = _data as any;
-  if (data) {
+  if (data.value) {
     emits('update:data', data.value?.list);
+    if (props.asyncListCallback) {
+      props.asyncListCallback();
+    }
   }
 });
 const pagination = reactive({

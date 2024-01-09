@@ -11,7 +11,7 @@
     <a-button type="primary" @click="showAddApi('添加API', true)"
       ><template #icon> <PlusOutlined /> </template>添加</a-button
     >
-    <a-button class="ml-3" :disabled="selectedRowKeys.length <= 0"
+    <a-button @click="removeByIds(selectedRowKeys)" class="ml-3" :disabled="selectedRowKeys.length <= 0"
       ><template #icon> <DeleteOutlined /> </template>删除</a-button
     >
     <SysTable
@@ -33,7 +33,7 @@
             <a-button type="link" @click="showAddApi('编辑', false, record)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
-            <a-button type="link"
+            <a-button type="link" @click="removeByIds([record.ID])"
               ><template #icon> <DeleteOutlined /> </template>删除</a-button
             >
           </div>
@@ -48,7 +48,7 @@
 import { ref, reactive } from 'vue';
 import SysTable from '@/components/sysTable/index.vue';
 import SysSearch from '@/components/sysSearch/index.vue';
-import { getApiList } from '@/api/modules/api';
+import { getApiList, deleteApisByIds } from '@/api/modules/api';
 import AddModal from './modules/addModal.vue';
 import { selectMethods } from './modules/data';
 import { ApiListRespType } from '@/types/api';
@@ -90,6 +90,12 @@ const selectedRowKeys = ref<string[]>([]);
 const onSelectChange = (_selectedRowKeys: string[]) => {
   selectedRowKeys.value = _selectedRowKeys;
 };
+
+// 删除
+function removeByIds(ids: string[]) {
+  deleteApisByIds(ids);
+  getList();
+}
 </script>
 
 <style scoped></style>

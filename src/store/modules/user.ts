@@ -1,6 +1,7 @@
 import { store } from '../index';
 import { defineStore } from 'pinia';
 import { getStorageToken, setStorageToken, removeStorageToken } from '@/utils/auth';
+import { checkThemebg, checkTextColor } from '@/utils/changeTheme';
 import router from '@/router/index';
 import { LoginRespType, LoginType } from '@/types/login';
 import lodash from 'lodash';
@@ -10,8 +11,9 @@ const defaultUserInfo: LoginRespType = {
   userInfo: {
     userName: '',
     nickName: '',
-    bgColor: '#001529',
+    baseColor: '#001529',
     textColor: '#ffffff',
+    activeColor: '',
     authority: {
       authorityId: 0,
       authorityName: '',
@@ -20,6 +22,7 @@ const defaultUserInfo: LoginRespType = {
       menus: [],
       defaultRouter: '',
       showMenuIds: '',
+      children: [],
     },
   },
 };
@@ -54,6 +57,12 @@ export const useUserStore = defineStore({
     setUserInfo(info: LoginRespType) {
       setStorageToken(info.accessToken);
       this.loginResp = info;
+      this.setColor();
+    },
+    setColor() {
+      // 设置颜色
+      checkThemebg(this.loginResp.userInfo.activeColor);
+      checkTextColor(this.loginResp.userInfo.textColor);
     },
   },
   persist: true,

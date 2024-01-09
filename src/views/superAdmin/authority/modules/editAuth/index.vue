@@ -6,7 +6,7 @@
           <AuthList v-if="attrs.open" :auth="selectAuth"></AuthList>
         </a-tab-pane>
         <a-tab-pane key="2" tab="角色API" class="p-2">
-          <AuthApi v-if="attrs.open"></AuthApi>
+          <AuthApi :auth="selectAuth" v-if="attrs.open"></AuthApi>
         </a-tab-pane>
         <a-tab-pane key="3" tab="资源权限"></a-tab-pane>
       </a-tabs>

@@ -48,3 +48,12 @@ declare interface SelectType {
   value: any;
   label: string;
 }
+// 请求返回
+declare interface RespType<T> {
+  code: number;
+  message: string;
+  result: T;
+  returnData: string;
+  success: boolean;
+  timestamp: number;
+}
