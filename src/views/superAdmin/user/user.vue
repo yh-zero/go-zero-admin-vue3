@@ -43,6 +43,9 @@
             <a-button type="link" @click="showAddApi('编辑', false, record)"
               ><template #icon> <EditOutlined /> </template>编辑</a-button
             >
+            <a-button type="link" @click="resetPsw(record.ID)"
+              ><template #icon> <EditOutlined /> </template>重置密码</a-button
+            >
             <SysRemoveBtn @handlerOK="removeByIds(record.ID)"></SysRemoveBtn>
           </div>
         </template>
@@ -59,9 +62,9 @@ import { getUserList } from '@/api/modules/userList';
 import AddModal from './modules/addModal.vue';
 import { UserListType } from '@/types/userList';
 import { AuthorityType } from '@/types/authority';
-import { editUserList } from '@/api/modules/userList';
+import { editUserList, resetUserPassword, deleteUser } from '@/api/modules/userList';
 import { useSelectHooks } from '@/hooks/baseSelectHooks';
-import { message } from 'ant-design-vue';
+import { message, Modal } from 'ant-design-vue';
 
 const { authorityListTree, getAuthList } = useSelectHooks();
 onMounted(() => {
@@ -79,11 +82,24 @@ function showAddApi(_title: string, _isAdd: boolean, selectData?: UserListType) 
   isAdd.value = _isAdd;
   title.value = _title;
 }
-//========= 删除 =
-async function removeByIds(id: string) {
-  console.log('====================================');
-  console.log(id);
-  console.log('====================================');
+//========= 重置密码 =========
+async function resetPsw(userId: number) {
+  Modal.confirm({
+    title: '警告',
+    content: '是否将此用户密码重置为goZero?',
+    okText: '确认',
+    cancelText: '取消',
+    onOk() {
+      resetUserPassword({ userId }).then(() => {
+        message.success('重置成功');
+      });
+    },
+  });
+}
+//========= 删除 =========
+async function removeByIds(userId: number) {
+  await deleteUser({ userId });
+  message.success('删除成功');
 }
 // ============= 列表接口数据 =============
 const dataSource = ref();

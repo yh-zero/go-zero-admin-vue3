@@ -1,6 +1,5 @@
 <template>
   <SysModal width="800px" @callBackOk="callBackOk" :formRef="formRef">
-    {{ authData }}
     <div class="pt-[20px]">
       <a-form layout="horizontal" ref="formRef" @finishFailed="finishFailed" :rules="rules" :model="authData" name="basic" :labelCol="{ span: 3 }" :wrapper-col="{ span: 24 }">
         <a-form-item name="parentId" label="父级角色" class="w-full">
@@ -53,27 +52,27 @@ watchEffect(() => {
     initauthData();
   }
 });
-let authData = reactive<AuthorityType>(defaultData);
+let authData = ref<AuthorityType>(defaultData);
 // 设置默认表单
 function initauthData() {
   if (attrs.selectItem) {
     if (attrs.isAdd) {
       const selectItem = attrs.selectItem as AuthorityType;
-      authData = reactive<AuthorityType>({ ...defaultData });
-      authData.parentId = selectItem.authorityId;
+      authData.value = { ...defaultData };
+      authData.value.parentId = selectItem.authorityId;
     } else {
-      authData = { ...(attrs.selectItem as AuthorityType) };
+      authData.value = { ...(attrs.selectItem as AuthorityType) };
     }
   } else {
-    authData = reactive<AuthorityType>({ ...defaultData });
+    authData.value = { ...defaultData };
   }
 }
 const formRef = ref();
 async function callBackOk() {
   if (attrs.isAdd) {
-    await createAuthority(authData);
+    await createAuthority(authData.value);
   } else {
-    await updateAuthority(authData);
+    await updateAuthority(authData.value);
   }
   emits('getList');
 }

@@ -1,8 +1,10 @@
 <template>
   <a-popconfirm title="确认删除吗?" ok-text="删除" cancel-text="取消" @confirm="confirm">
-    <a-button :disabled="disabled" type="link"
-      ><template #icon> <DeleteOutlined /> </template>删除</a-button
-    >
+    <slot>
+      <a-button :disabled="disabled" type="link"
+        ><template #icon> <DeleteOutlined /> </template>删除</a-button
+      >
+    </slot>
   </a-popconfirm>
 </template>
 

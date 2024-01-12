@@ -1,5 +1,5 @@
 <template>
-  <SysModal width="960px" @ok="ok" :formRef="formRef">
+  <SysModal width="960px" @call-back-ok="ok" :formRef="formRef">
     <div class="pt-[20px]">
       <a-form layout="horizontal" ref="formRef" @finishFailed="finishFailed" :rules="rules" :model="modalData" name="basic" :labelCol="{ span: 3 }" :wrapper-col="{ span: 24 }">
         <a-form-item name="userName" label="路径" class="w-full">
@@ -41,8 +41,8 @@
 import { useAttrs, watchEffect, reactive, ref } from 'vue';
 import SysModal from '@/components/sysModal/index.vue';
 import { defaultData, rules } from './data';
-import { AddUserInfoType, UserListType } from '@/types/userList';
-
+import { UserListType } from '@/types/userList';
+import { register, editUserList } from '@/api/modules/userList';
 const emits = defineEmits(['getList']);
 const attrs = useAttrs();
 watchEffect(() => {
@@ -50,20 +50,21 @@ watchEffect(() => {
     initmodalData();
   }
 });
-let modalData = reactive<AddUserInfoType>({ ...defaultData });
+let modalData = ref<UserListType>({ ...defaultData });
 // 设置默认表单
 function initmodalData() {
   if (attrs.selectItem) {
-    const item = attrs.selectItem as UserListType;
-    modalData.userName = item.userName;
-    modalData.passWord = '';
-    modalData.nickName = item.nickName;
-    modalData.authorityIds = item.selectIds || [];
+    modalData.value = attrs.selectItem as UserListType;
   }
 }
 
 const formRef = ref();
 async function ok() {
+  if (modalData.value.authorityId) {
+    await register(modalData.value);
+  } else {
+    await editUserList(modalData.value);
+  }
   emits('getList');
 }
 //

@@ -1,5 +1,5 @@
 <template>
-  <template v-for="(item, index) in showMenuList">
+  <template v-for="item in showMenuList">
     <a-sub-menu v-if="item.children && item.children.length > 0" :key="item.path" :index="item.path">
       <template #title>
         <component :is="item.meta?.icon"></component>
@@ -7,7 +7,7 @@
       </template>
       <MenuItem :menu-list="item.children"></MenuItem>
     </a-sub-menu>
-    <a-menu-item v-else :key="item.path + index" :index="item.path" @click="toPage(item)">
+    <a-menu-item v-else :key="item.path + ''" :index="item.path" @click="toPage(item)">
       <component :is="item.meta?.icon"></component>
 
       <span> {{ item.meta?.title }}</span>

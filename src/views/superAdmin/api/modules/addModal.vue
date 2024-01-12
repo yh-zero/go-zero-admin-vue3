@@ -1,5 +1,5 @@
 <template>
-  <SysModal width="800px" @ok="callBackOk" :formRef="formRef">
+  <SysModal width="800px" @callBackOk="callBackOk" :formRef="formRef">
     <div class="flex items-center w-full bg-[#fffae6] p-2">
       <div class="bg-[#f08c0e] w-[12px] h-[12px] flex justify-center items-center rounded-full text-xs text-white mr-1">!</div>
       <span class="text-[#f08c0e] text-xs"> 新增API，需要在角色管理内配置权限才可使用</span>
@@ -36,18 +36,18 @@ watchEffect(() => {
     initApiData();
   }
 });
-let ApiData = reactive<ApiListRespType>({ ...defaultData });
+let ApiData = ref<ApiListRespType>({ ...defaultData });
 // 设置默认表单
 function initApiData() {
-  ApiData = { ...(attrs.selectItem as ApiListRespType) };
+  ApiData.value = { ...(attrs.selectItem as ApiListRespType) };
 }
 
 const formRef = ref();
 async function callBackOk() {
   if (attrs.isAdd) {
-    await createApi(ApiData);
+    await createApi(ApiData.value);
   } else {
-    await updateApi(ApiData);
+    await updateApi(ApiData.value);
   }
   emits('getList');
 }

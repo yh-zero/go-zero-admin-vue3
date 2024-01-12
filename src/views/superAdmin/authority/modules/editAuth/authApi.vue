@@ -1,6 +1,5 @@
 <template>
   <div v-if="apiAllList && apiAllList.length > 0">
-    {{ checkedKeys }}
     <div class="flex justify-between">
       <a-input @change="changeSearch" v-model:value="searchAuth" class="w-[65%] mb-2" placeholder="筛选" />
       <a-button @click="toAddAuthorityMenu" type="primary" class="mr-5">确定</a-button>
