@@ -25,9 +25,9 @@
           </a-tree-select>
           <!-- <a-select :disabled="attrs.title == '添加子角色'" allowClear v-model:value="authData.parentId" placeholder="父级角色" :options="selectYesNo" /> -->
         </a-form-item>
-        <a-form-item name="authorityId" label="角色ID" class="w-full">
+        <!-- <a-form-item name="authorityId" label="角色ID" class="w-full">
           <a-input-number :controls="false" class="w-full" :disabled="attrs.title == '编辑角色'" v-model:value="authData.authorityId" placeholder="角色ID" />
-        </a-form-item>
+        </a-form-item> -->
         <a-form-item name="authorityName" label="角色姓名" class="w-full">
           <a-input v-model:value="authData.authorityName" placeholder="角色姓名" />
         </a-form-item>

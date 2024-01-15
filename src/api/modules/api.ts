@@ -1,5 +1,5 @@
 import http from '../request';
-import { ApiListRespType } from '@/types/api';
+import { ApiListRespType, ListSearchType } from '@/types/api';
 
 // 新增APi
 export const createApi = (data: ApiListRespType): Promise<string> => {
@@ -11,7 +11,7 @@ export const updateApi = (data: ApiListRespType): Promise<string> => {
 };
 
 // 获取api列表
-export const getApiList = (data: IProgressReq & { path: string }): Promise<IProgressResp<ApiListRespType>> => {
+export const getApiList = (data: IProgressReq & ListSearchType): Promise<IProgressResp<ApiListRespType>> => {
   return http.get('/v1/sys/api/getApiList', data);
 };
 // 获取全部api列表

@@ -1,6 +1,5 @@
 <template>
-  <Upload :file-number="10" v-model:value="file" list-type="picture-card"></Upload>
-  <RouterView></RouterView>
+  <Upload :file-number="2" v-model:value="file" list-type="picture-card"></Upload>
 </template>
 
 <script setup lang="ts">

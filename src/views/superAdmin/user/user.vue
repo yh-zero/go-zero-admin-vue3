@@ -35,7 +35,7 @@
         </template>
         <!--  -->
         <template v-if="column.slotName == 'enable'">
-          <a-switch @change="(checked:number) =>{enableUser(checked,record.ID)}" :checkedValue="1" :unCheckedValue="0" v-model:checked="record.enable" />
+          <a-switch @change="(checked:number) =>{enableUser(checked,record.ID)}" :checkedValue="1" :unCheckedValue="-1" v-model:checked="record.enable" />
         </template>
         <!--  -->
         <template v-if="column.slotName == 'edit'">

@@ -16,11 +16,13 @@ export interface LoginRespType {
   accessToken: string;
   userInfo: {
     userName: string;
+    headerImg: string;
     nickName: string;
     baseColor: string;
     activeColor: string;
     textColor: string;
     authority: AuthorityType;
+    authorities: AuthorityType[];
   };
 }
 

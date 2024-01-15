@@ -11,6 +11,7 @@ import { useAttrs, watchEffect, reactive, onMounted } from 'vue';
 import { usePagination } from 'vue-request';
 interface Props {
   getList?: Function; //请求列表的方法
+  searchData?: any;
   asyncListCallback?: Function; //更新列表回调
   pageSize?: number; //每页显示条数
 }
@@ -19,6 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
     return Promise.resolve();
   },
   pageSize: 10,
+  searchData: {},
 });
 
 const emits = defineEmits(['update:data']);
@@ -33,9 +35,9 @@ const customRow = () => {
 // =========== 分页处理 ===========
 onMounted(() => {
   if (attrs.pagination == false) {
-    changePageSize(999999999);
+    toGetList({ pageSize: 99999 });
   } else if (props.pageSize) {
-    changePageSize(props.pageSize);
+    toGetList();
   }
 });
 
@@ -81,17 +83,17 @@ const handleChange = (pag: { pageSize: number; current: number }, filters: any, 
     pageNo: pag?.current,
     sortField: sorter.field,
     sortOrder: sorter.order,
-    a: 'asdasd',
-
     ...filters,
+    ...props.searchData,
   });
 };
 // 暴露重新请求
-function toGetList(searchData = {}) {
+function toGetList(search?: Object) {
   run({
     pageNo: current.value,
     pageSize: pageSize.value,
-    ...searchData,
+    ...props.searchData,
+    ...search,
   });
 }
 // 主动暴露childMethod方法

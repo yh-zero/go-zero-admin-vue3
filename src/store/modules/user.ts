@@ -24,6 +24,7 @@ const defaultUserInfo: LoginRespType = {
       showMenuIds: '',
       children: [],
     },
+    headerImg: '',
   },
 };
 type UserState = {

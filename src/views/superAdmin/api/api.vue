@@ -19,6 +19,7 @@
       ref="tableRef"
       v-model:data="dataSource"
       :getList="getApiList"
+      :search-data="search"
       class="mt-3"
       :dataSource="dataSource"
       :columns="columns"
@@ -48,13 +49,15 @@ import SysSearch from '@/components/sysSearch/index.vue';
 import { getApiList, deleteApisByIds } from '@/api/modules/api';
 import AddModal from './modules/addModal.vue';
 import { selectMethods } from './modules/data';
-import { ApiListRespType } from '@/types/api';
+import { ApiListRespType, ListSearchType } from '@/types/api';
 // ======== 搜索 ========
-const search = reactive({
+const search = reactive<ListSearchType>({
   path: '',
   description: '',
   apiGroup: '',
   method: '',
+  orderKey: 'id',
+  desc: false,
 });
 // ========= 【弹窗】 编辑 ｜ 新增  =========
 const showAddModal = ref(false);
@@ -72,7 +75,7 @@ const dataSource = ref();
 const tableRef = ref();
 // 手动请求
 function getList() {
-  tableRef.value.toGetList(search);
+  tableRef.value.toGetList();
 }
 const columns = [
   { title: 'id', dataIndex: 'ID', key: 'ID' },

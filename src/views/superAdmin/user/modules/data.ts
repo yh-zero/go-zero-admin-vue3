@@ -33,5 +33,5 @@ export const rules: Record<string, Rule[]> = {
   userName: [{ required: true, message: '请输入路径', trigger: 'change' }],
   passWord: [{ required: true, message: '请选择请求', trigger: 'change' }],
   nickName: [{ required: true, message: '请输入Api分组', trigger: 'change' }],
-  authorityIds: [{ required: true, message: '请输入Api简介', trigger: 'change' }],
+  selectIds: [{ required: true, message: '请输入Api简介', trigger: 'change' }],
 };

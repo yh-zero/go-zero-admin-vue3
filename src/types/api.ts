@@ -6,6 +6,15 @@ export interface ApiListRespType {
   method: keyof typeof ApiMethodEnum; //'GET';
   ID: number;
 }
+export interface ListSearchType {
+  path: string;
+  description: string;
+  apiGroup: string;
+  method: string;
+  orderKey: string;
+  desc: boolean;
+}
+
 export enum ApiMethodEnum {
   GET = 'GET',
   POST = 'POST',

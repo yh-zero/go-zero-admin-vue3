@@ -11,9 +11,10 @@
         <a-form-item name="nickName" label="昵称" class="w-full">
           <a-input v-model:value="modalData.nickName" placeholder="请输入昵称" />
         </a-form-item>
-        <a-form-item name="authorityIds" label="用户角色" class="w-full">
+
+        <a-form-item name="selectIds" label="用户角色" class="w-full">
           <a-tree-select
-            v-model:value="modalData.authorityIds"
+            v-model:value="modalData.selectIds"
             :fieldNames="{
               label: 'authorityName',
               value: 'authorityId',
@@ -32,6 +33,12 @@
             </template>
           </a-tree-select>
         </a-form-item>
+        <a-form-item label="启用" class="w-full">
+          <a-switch :checkedValue="1" :unCheckedValue="-1" v-model:checked="modalData.enable" />
+        </a-form-item>
+        <a-form-item label="启用" class="w-full">
+          <Upload v-if="attrs.open" :file-number="1" v-model:value="modalData.headerImg" list-type="picture-card"></Upload>
+        </a-form-item>
       </a-form>
     </div>
   </SysModal>
@@ -39,10 +46,12 @@
 
 <script setup lang="ts">
 import { useAttrs, watchEffect, reactive, ref } from 'vue';
+import Upload from '@/components/sysUpload/index.vue';
 import SysModal from '@/components/sysModal/index.vue';
 import { defaultData, rules } from './data';
 import { UserListType } from '@/types/userList';
 import { register, editUserList } from '@/api/modules/userList';
+import lodash from 'lodash';
 const emits = defineEmits(['getList']);
 const attrs = useAttrs();
 watchEffect(() => {
@@ -54,13 +63,14 @@ let modalData = ref<UserListType>({ ...defaultData });
 // 设置默认表单
 function initmodalData() {
   if (attrs.selectItem) {
-    modalData.value = attrs.selectItem as UserListType;
+    modalData.value = lodash.cloneDeep(attrs.selectItem) as UserListType;
   }
 }
 
 const formRef = ref();
 async function ok() {
-  if (modalData.value.authorityId) {
+  modalData.value.authorityIds = modalData.value.selectIds;
+  if (!modalData.value.ID) {
     await register(modalData.value);
   } else {
     await editUserList(modalData.value);
