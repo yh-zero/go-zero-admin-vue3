@@ -18,3 +18,7 @@ export const updateAuthority = (data: AuthorityType) => {
 export const createAuthority = (data: AuthorityType) => {
   return http.post('/v1/sys/authority/createAuthority', data);
 };
+// 删除角色信息
+export const deleteAuthority = (data: { id: number }) => {
+  return http.delete('/v1/sys/authority/deleteAuthority', data);
+};

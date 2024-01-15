@@ -32,8 +32,10 @@ onMounted(() => {
 const expandedKeys = ref<number[]>([]);
 const checkedKeys = ref<number[]>([]);
 async function toAddAuthorityMenu() {
+  // 过滤非数字
+  checkedKeys.value = checkedKeys.value.filter(res => !isNaN(res));
   await addAuthorityMenu({ authorityId: props.auth.authorityId, menuIds: checkedKeys.value.join(',') });
-  message.success('菜单设置成功');
+  message.success('API设置成功');
 }
 
 // =========== 筛选 ============

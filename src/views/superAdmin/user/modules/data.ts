@@ -1,11 +1,31 @@
 import type { Rule } from 'ant-design-vue/es/form';
-import { AddUserInfoType } from '@/types/userList';
-export const defaultData: AddUserInfoType = {
+import { UserListType } from '@/types/userList';
+export const defaultData: UserListType = {
   userName: '',
   passWord: '',
   nickName: '',
   authorityId: 0,
   authorityIds: [],
+  uuid: '',
+  sideMode: '',
+  headerImg: '',
+  baseColor: '',
+  activeColor: '',
+  authority: {
+    authorityId: 0,
+    authorityName: '',
+    parentId: 0,
+    dataAuthorityId: [],
+    showMenuIds: '',
+    children: null,
+    menus: [],
+    defaultRouter: '',
+  },
+  authorities: [],
+  phone: '',
+  email: '',
+  enable: 0,
+  ID: 0,
 };
 
 // 校验表单

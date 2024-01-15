@@ -18,12 +18,13 @@ export interface UserListType {
   // 编辑使用
   selectIds?: number[]; //用户角色
   authorityIds?: number[];
-  password?: string;
+  passWord?: string;
 }
 
 // 修改用户信息
 export interface EditUserInfoType {
   ID: number;
+  passWord?: string;
   nickName?: string; // 用户昵称
   sideMode?: string; // 用户侧边主题
   headerImg?: string;

@@ -35,7 +35,7 @@
               添加子角色</a-button
             >
 
-            <a-button type="link">
+            <a-button type="link" @click="copy(record)">
               <template #icon> <CopyOutlined /></template>复制</a-button
             >
             <a-button type="link" @click="showAddMenu('编辑角色', false, record)"
@@ -58,6 +58,8 @@ import { getAuthorityList } from '@/api/modules/authority';
 import { AuthorityType } from '@/types/authority';
 import AddModal from './modules/addModal.vue';
 import EditAuth from './modules/editAuth/index.vue';
+import { createAuthority, deleteAuthority } from '@/api/modules/authority';
+import { message } from 'ant-design-vue';
 onMounted(() => {
   getList();
 });
@@ -69,6 +71,15 @@ const showEditAuth = ref(false);
 function openEditAuth(auth: AuthorityType) {
   showEditAuth.value = true;
   selectItem.value = auth;
+}
+
+// =========== 复制 ==========
+async function copy(item: AuthorityType) {
+  const _item = { ...item };
+  _item.authorityId = 0;
+  await createAuthority(_item);
+  message.success('复制成功');
+  getList();
 }
 // =========== 新增角色 ==========
 
@@ -84,10 +95,10 @@ function showAddMenu(title: string, add: boolean, selectData?: AuthorityType) {
 }
 
 //=========== 删除 ===============
-function removeOne(id: number) {
-  console.log('====================================');
-  console.log(id);
-  console.log('====================================');
+async function removeOne(id: number) {
+  await deleteAuthority({ id });
+  message.success('删除成功');
+  getList();
 }
 //=========== 表格 ===============
 const loading = ref(false);
