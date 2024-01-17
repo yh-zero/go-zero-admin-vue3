@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen w-screen bg-[#f0f2f5] bg-[url('@/assets/svg/login/bg.svg')] flex flex-center">
     <div class="w-[370px] h-[412px] border-solid border border-[#bbbbbb] rounded-[16px] bg-white flex flex-col items-center">
-      <p class="text-[26px] text-black font-[600] mt-[20px]">绩效考评系统</p>
+      <p class="text-[26px] text-black font-[600] mt-[20px]">Go-Zero-Admin</p>
       <div class="p-[30px]">
         <div class="demo-login">
           <a-form :model="loginFrom" name="basic" autocomplete="off" @finish="handleSubmit" @finishFailed="onFinishFailed">

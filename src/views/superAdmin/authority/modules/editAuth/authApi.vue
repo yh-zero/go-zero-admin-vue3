@@ -1,8 +1,8 @@
 <template>
   <div v-if="apiAllList && apiAllList.length > 0">
     <div class="flex justify-between">
-      <a-input @change="changeSearch" v-model:value="searchAuth" class="w-[65%] mb-2" placeholder="筛选" />
-      <a-button @click="toAddAuthorityMenu" type="primary" class="mr-5">确定</a-button>
+      <!-- <a-input @change="changeSearch" v-model:value="searchAuth" class="w-[65%] mb-2" placeholder="筛选" /> -->
+      <a-button @click="toAddAuthorityMenu" type="primary" class="mr-5 ml-[65%]">确定</a-button>
     </div>
     <a-tree v-model:expandedKeys="expandedKeys" :defaultExpandAll="defaultExpandAll" v-model:checkedKeys="checkedKeys" checkable :tree-data="apiAllList"> </a-tree>
   </div>

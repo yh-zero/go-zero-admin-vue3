@@ -25,6 +25,7 @@ const defaultUserInfo: LoginRespType = {
       children: [],
     },
     headerImg: '',
+    authorities: [],
   },
 };
 type UserState = {
@@ -49,11 +50,11 @@ export const useUserStore = defineStore({
     // 清除登录信息
     resetState() {
       removeStorageToken();
-      (this.loginResp = lodash.cloneDeep(defaultUserInfo)),
-        // 跳转到登录页
-        router.push({
-          path: '/',
-        });
+      this.loginResp = lodash.cloneDeep(defaultUserInfo);
+      // 跳转到登录页
+      router.push({
+        path: '/',
+      });
     },
     setUserInfo(info: LoginRespType) {
       setStorageToken(info.accessToken);

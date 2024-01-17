@@ -1,5 +1,7 @@
 <template>
-  <div class="text-[red]">首页</div>
+  <div class="flex items-center justify-center h-full">
+    <img src="@/assets/logo.png" alt="" class="rounded-3xl" />
+  </div>
 </template>
 
 <script setup lang="ts"></script>

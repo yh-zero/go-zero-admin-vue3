@@ -38,3 +38,8 @@ export const updateSysDictionaryInfo = (data: DictionaryDetailListResp): Promise
 export const deleteSysDictionaryInfo = (data: { id: number }): Promise<string> => {
   return http.delete('/v1/sys/dictionary/deleteSysDictionaryInfo', data);
 };
+// ======================
+// 根据类型获取字典详情
+export const getDictDetail = (data: { type: string }): Promise<DictionaryDetailListResp[]> => {
+  return http.get('/v1/sys/dictionary/getDictDetailByType', data);
+};

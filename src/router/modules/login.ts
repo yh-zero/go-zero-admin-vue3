@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const loginRouter: RouteRecordRaw[] = [
   {
-    name: 'index',
+    name: 'baserouter',
     path: '/',
     redirect: '/login',
     children: [
