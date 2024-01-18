@@ -1,11 +1,11 @@
 <template>
-  <Upload :file-number="2" v-model:value="file" list-type="picture-card"></Upload>
+  <SysDict :needForm="true" dict="method" v-model:value="search"></SysDict>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import Upload from '@/components/sysUpload/index.vue';
-const file = ref(['https://go-zero-admin.oss-cn-beijing.aliyuncs.com/go-zero-admin/1704800888902_PixPin_2024-01-09_10-32-50 - 副本.png']);
+import SysDict from '@/components/sysDict/sysDict.vue';
+const search = ref('');
 </script>
 
 <style scoped></style>

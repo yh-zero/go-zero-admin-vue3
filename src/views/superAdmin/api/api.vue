@@ -1,12 +1,22 @@
 <template>
   <div>
     <SysSearch v-model:search="search" @toSearch="getList">
-      <a-form-item label="路径" name="path"><a-input v-model:value="search.path" /></a-form-item>
-      <a-form-item label="描述" name="description"><a-input v-model:value="search.description" /></a-form-item>
-      <a-form-item label="API组" name="apiGroup"><a-input v-model:value="search.apiGroup" /></a-form-item>
-      <a-form-item label="请求" name="method">
-        <a-select allowClear v-model:value="search.method" placeholder="请输入Api分组" :options="selectMethods" />
-      </a-form-item>
+      <a-form-item label="路径" name="path"
+        ><a-input placeholder="请输入路径" v-model:value="search.path"
+      /></a-form-item>
+      <a-form-item label="简介" name="description"
+        ><a-input placeholder="简介" v-model:value="search.description"
+      /></a-form-item>
+      <a-form-item label="API分组" name="apiGroup"
+        ><a-input placeholder="API分组" v-model:value="search.apiGroup"
+      /></a-form-item>
+      <SysDict
+        type="select"
+        :needForm="true"
+        dict="method"
+        v-model:value="search.dictIdMethod"
+        placeholder="请输入Api分组"
+      />
     </SysSearch>
     <a-button type="primary" @click="showAddApi('添加API', true)"
       ><template #icon> <PlusOutlined /> </template>添加</a-button
@@ -38,7 +48,13 @@
         </template>
       </template>
     </SysTable>
-    <AddModal :isAdd="isAdd" @getList="getList" :title="title" v-model:open="showAddModal" :selectItem="selectItem"></AddModal>
+    <AddModal
+      :isAdd="isAdd"
+      @getList="getList"
+      :title="title"
+      v-model:open="showAddModal"
+      :selectItem="selectItem"
+    ></AddModal>
   </div>
 </template>
 
@@ -48,14 +64,13 @@ import SysTable from '@/components/sysTable/index.vue';
 import SysSearch from '@/components/sysSearch/index.vue';
 import { getApiList, deleteApisByIds } from '@/api/modules/api';
 import AddModal from './modules/addModal.vue';
-import { selectMethods } from './modules/data';
 import { ApiListRespType, ListSearchType } from '@/types/api';
+import SysDict from '@/components/sysDict/sysDict.vue';
 // ======== 搜索 ========
 const search = reactive<ListSearchType>({
   path: '',
   description: '',
   apiGroup: '',
-  method: '',
   orderKey: 'id',
   desc: false,
 });

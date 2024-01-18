@@ -10,7 +10,8 @@ export interface ListSearchType {
   path: string;
   description: string;
   apiGroup: string;
-  method: string;
+  method?: string;
+  dictIdMethod?: number;
   orderKey: string;
   desc: boolean;
 }
