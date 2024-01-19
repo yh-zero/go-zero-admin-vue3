@@ -1,5 +1,5 @@
 <template>
-  <a-checkbox-group v-bind="$attrs" :options="option" />
+  <a-radio-group v-bind="$attrs" :options="option" />
 </template>
 
 <script setup lang="ts">

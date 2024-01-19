@@ -1,8 +1,17 @@
 <template>
   <SysModal width="960px" @call-back-ok="ok" :formRef="formRef">
     <div class="pt-[20px]">
-      <a-form layout="horizontal" ref="formRef" @finishFailed="finishFailed" :rules="rules" :model="modalData" name="basic" :labelCol="{ span: 3 }" :wrapper-col="{ span: 24 }">
-        <a-form-item name="userName" label="路径" class="w-full">
+      <a-form
+        layout="horizontal"
+        ref="formRef"
+        @finishFailed="finishFailed"
+        :rules="rules"
+        :model="modalData"
+        name="basic"
+        :labelCol="{ span: 3 }"
+        :wrapper-col="{ span: 24 }"
+      >
+        <a-form-item name="userName" label="用户名" class="w-full">
           <a-input v-model:value="modalData.userName" placeholder="请输入用户名" />
         </a-form-item>
         <a-form-item name="passWord" label="密码" class="w-full" v-if="attrs.isAdd">
@@ -37,7 +46,12 @@
           <a-switch :checkedValue="1" :unCheckedValue="-1" v-model:checked="modalData.enable" />
         </a-form-item>
         <a-form-item label="启用" class="w-full">
-          <Upload v-if="attrs.open" :file-number="1" v-model:value="modalData.headerImg" list-type="picture-card"></Upload>
+          <Upload
+            v-if="attrs.open"
+            :file-number="1"
+            v-model:value="modalData.headerImg"
+            list-type="picture-card"
+          ></Upload>
         </a-form-item>
       </a-form>
     </div>

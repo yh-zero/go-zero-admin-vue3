@@ -2,9 +2,10 @@
   <a-select
     :fieldNames="fieldNames"
     v-bind="$attrs"
+    optionFilterProp="label"
     :options="diceDetail.sysDictionaryInfoList"
     allowClear
-    :placeholder="'请选择'"
+    :placeholder="'请选择' + diceDetail.name"
   />
 </template>
 

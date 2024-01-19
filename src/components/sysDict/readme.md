@@ -1,3 +1,20 @@
+## 使用方式
+1. 引入组件
+```js
+import SysDict from '@/components/sysDict/sysDict.vue';
+```
+
+2. 使用组件
+  **四个写入项目**
+     - dict: string;                            //字典类型  【必填】
+     - type: 'select' | 'checkbox' | 'radio';   //可选类型  【默认select】
+     - needForm?: boolean;                      //是否需要form表单格式 【默认false】
+     - labelName?: string;                      //表单label名称 【非必填】
+
+`** 除了上面属性 其余API均与antd-vue V4x中对应的UI组件文档一致 **`
+
+3. 例子
+```vue
 <template>
   <!-- 基本使用 -->
 
@@ -46,3 +63,5 @@ const radioVal = ref('');
 </script>
 
 <style scoped></style>
+
+```
