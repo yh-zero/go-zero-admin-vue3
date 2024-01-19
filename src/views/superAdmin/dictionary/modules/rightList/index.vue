@@ -7,7 +7,15 @@
     >
   </div>
   <div class="overflow-y-auto h-full">
-    <SysTable rowKey="ID" ref="tableRef" v-model:data="dataSource" :getList="getSysDictionaryInfoList" class="mt-3" :dataSource="dataSource" :columns="columns">
+    <SysTable
+      rowKey="ID"
+      ref="tableRef"
+      v-model:dataSource="dataSource"
+      :getList="getSysDictionaryInfoList"
+      class="mt-3"
+      :dataSource="dataSource"
+      :columns="columns"
+    >
       <template #tableSlot="{ column, record }">
         <template v-if="column.slotName == 'icon'">
           <component :is="record.meta.icon"></component>
@@ -23,7 +31,14 @@
       </template>
     </SysTable>
   </div>
-  <AddModal :id="selectId" :isAdd="isAdd" @getList="getList" :title="title" v-model:open="showAddModal" :selectItem="selectItem"></AddModal>
+  <AddModal
+    :id="selectId"
+    :isAdd="isAdd"
+    @getList="getList"
+    :title="title"
+    v-model:open="showAddModal"
+    :selectItem="selectItem"
+  ></AddModal>
 </template>
 
 <script setup lang="ts">

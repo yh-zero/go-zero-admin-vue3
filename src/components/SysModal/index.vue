@@ -1,15 +1,13 @@
 <template>
-  <a-modal :cancelText="cancelText" :okText="okText" v-model:open="_open" @ok="handleOK">
+  <a-modal v-bind="$attrs" v-model:open="_open" @ok="handleOK">
     <slot></slot>
   </a-modal>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue';
+import { computed } from 'vue';
 interface Props {
   open: boolean;
-  okText?: string;
-  cancelText?: string;
   formRef?: any; //校验表单Ref
 }
 

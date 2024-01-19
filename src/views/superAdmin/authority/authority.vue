@@ -47,7 +47,14 @@
       </template>
     </SysTable>
   </div>
-  <AddModal :dataSource="dataSource" @getList="getList" :title="addMenuModalTitle" v-model:open="showAddModal" :isAdd="isAdd" :selectItem="selectItem"></AddModal>
+  <AddModal
+    :dataSource="dataSource"
+    @getList="getList"
+    :title="addMenuModalTitle"
+    v-model:open="showAddModal"
+    :isAdd="isAdd"
+    :selectItem="selectItem"
+  ></AddModal>
   <EditAuth @getList="getList" :selectItem="selectItem" v-model:open="showEditAuth"></EditAuth>
 </template>
 

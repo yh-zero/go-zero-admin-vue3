@@ -1,10 +1,18 @@
 <template>
   <div class="h-screen w-screen bg-[#f0f2f5] bg-[url('@/assets/svg/login/bg.svg')] flex flex-center">
-    <div class="w-[370px] h-[412px] border-solid border border-[#bbbbbb] rounded-[16px] bg-white flex flex-col items-center">
+    <div
+      class="w-[370px] h-[412px] border-solid border border-[#bbbbbb] rounded-[16px] bg-white flex flex-col items-center"
+    >
       <p class="text-[26px] text-black font-[600] mt-[20px]">Go-Zero-Admin</p>
       <div class="p-[30px]">
         <div class="demo-login">
-          <a-form :model="loginFrom" name="basic" autocomplete="off" @finish="handleSubmit" @finishFailed="onFinishFailed">
+          <a-form
+            :model="loginFrom"
+            name="basic"
+            autocomplete="off"
+            @finish="handleSubmit"
+            @finishFailed="onFinishFailed"
+          >
             <a-form-item label="" name="username" :rules="[{ required: true, message: '请输入账户名!' }]">
               <a-input size="large" placeholder="请输入账户名" v-model:value="loginFrom.username">
                 <template #addonBefore>
@@ -37,7 +45,15 @@
               </a-col>
             </a-row>
             <a-form-item style="margin-top: 24px">
-              <a-button size="large" type="primary" htmlType="submit" class="w-full h-[40px]" :loading="loginBtn" :disabled="loginBtn">确定 </a-button>
+              <a-button
+                size="large"
+                type="primary"
+                htmlType="submit"
+                class="w-full h-[40px]"
+                :loading="loginBtn"
+                :disabled="loginBtn"
+                >确定
+              </a-button>
             </a-form-item>
           </a-form>
         </div>
@@ -63,7 +79,7 @@ onMounted(() => {
   toGetCaptcha();
   if (mode.IS_DEV) {
     loginFrom.captcha = '000000';
-    loginFrom.username = 'yanghao';
+    loginFrom.username = 'admin';
     loginFrom.password = '123456';
   }
 });

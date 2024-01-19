@@ -27,11 +27,10 @@
       rowKey="ID"
       :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
       ref="tableRef"
-      v-model:data="dataSource"
+      v-model:dataSource="dataSource"
       :getList="getApiList"
       :search-data="search"
       class="mt-3"
-      :dataSource="dataSource"
       :columns="columns"
     >
       <template #tableSlot="{ column, record }">

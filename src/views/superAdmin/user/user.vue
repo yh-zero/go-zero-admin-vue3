@@ -4,7 +4,15 @@
       ><template #icon> <PlusOutlined /> </template>新增用户</a-button
     >
 
-    <SysTable rowKey="ID" ref="tableRef" v-model:data="dataSource" :getList="getUserList" class="mt-3" :dataSource="dataSource" :columns="columns" :asyncListCallback="asyncListCallback">
+    <SysTable
+      rowKey="ID"
+      ref="tableRef"
+      v-model:dataSource="dataSource"
+      :getList="getUserList"
+      class="mt-3"
+      :columns="columns"
+      @asyncListCallback="asyncListCallback"
+    >
       <template #tableSlot="{ text, column, record }">
         <!--  -->
         <template v-if="column.slotName == 'headerImg'">
@@ -35,7 +43,12 @@
         </template>
         <!--  -->
         <template v-if="column.slotName == 'enable'">
-          <a-switch @change="(checked:number) =>{enableUser(checked,record.ID)}" :checkedValue="1" :unCheckedValue="-1" v-model:checked="record.enable" />
+          <a-switch
+            @change="(checked:number) =>{enableUser(checked,record.ID)}"
+            :checkedValue="1"
+            :unCheckedValue="-1"
+            v-model:checked="record.enable"
+          />
         </template>
         <!--  -->
         <template v-if="column.slotName == 'edit'">
@@ -51,7 +64,14 @@
         </template>
       </template>
     </SysTable>
-    <AddModal :authorityListTree="authorityListTree" :isAdd="isAdd" @getList="getList" :title="title" v-model:open="showAddModal" :selectItem="selectItem"></AddModal>
+    <AddModal
+      :authorityListTree="authorityListTree"
+      :isAdd="isAdd"
+      @getList="getList"
+      :title="title"
+      v-model:open="showAddModal"
+      :selectItem="selectItem"
+    ></AddModal>
   </div>
 </template>
 

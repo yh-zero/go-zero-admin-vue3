@@ -1,5 +1,11 @@
 <template>
-  <a-table :loading="loading" @change="handleChange" :pagination="pagination" :customRow="customRow">
+  <a-table
+    :dataSource="dataSource"
+    :loading="loading"
+    @change="handleChange"
+    :pagination="pagination"
+    :customRow="customRow"
+  >
     <template #bodyCell="{ text, record, index, column }">
       <slot name="tableSlot" :text="text" :index="index" :column="column" :record="record"></slot>
     </template>
@@ -12,7 +18,7 @@ import { usePagination } from 'vue-request';
 interface Props {
   getList?: Function; //请求列表的方法
   searchData?: any;
-  asyncListCallback?: Function; //更新列表回调
+  dataSource: any;
   pageSize?: number; //每页显示条数
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -23,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
   searchData: {},
 });
 
-const emits = defineEmits(['update:data']);
+const emits = defineEmits(['update:dataSource', 'asyncListCallback']);
 
 const attrs = useAttrs();
 const customRow = () => {
@@ -60,10 +66,8 @@ const {
 watchEffect(() => {
   const data = _data as any;
   if (data.value) {
-    emits('update:data', data.value?.list);
-    if (props.asyncListCallback) {
-      props.asyncListCallback();
-    }
+    emits('update:dataSource', data.value?.list);
+    emits('asyncListCallback', data.value?.list);
   }
 });
 const pagination = reactive({

@@ -43,6 +43,7 @@
       <span class="text-[blue]">{{ option }}</span>
     </template>
   </SysDict>
+  <Upload :file-number="1" v-model:value="data" list-type="picture-card"></Upload>
 </template>
 
 <script setup lang="ts">
@@ -52,6 +53,9 @@ import SysDict from '@/components/sysDict/sysDict.vue';
 const selectVal = ref();
 const checkboxVal = ref();
 const radioVal = ref('');
+
+import Upload from '@/components/sysUpload/index.vue';
+const data = ref('');
 </script>
 
 <style scoped></style>

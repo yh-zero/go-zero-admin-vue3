@@ -1,6 +1,15 @@
 <template>
   <a-card class="mb-3">
-    <a-form ref="searchRef" class="grid gap-2" layout="inline" :model="formState" name="basic" :label-col="{ span: 7 }" :wrapper-col="{ span: 17 }" autocomplete="off">
+    <a-form
+      ref="searchRef"
+      class="grid gap-2"
+      layout="inline"
+      :model="formState"
+      name="basic"
+      :label-col="{ span: 7 }"
+      :wrapper-col="{ span: 17 }"
+      autocomplete="off"
+    >
       <!-- 默认插槽 -->
       <div class="grid grid-cols-4 gap-2">
         <slot name="default"></slot>
@@ -31,7 +40,7 @@ const props = defineProps({
 });
 
 //========= 折叠 =========
-const isFolded = ref(true);
+const isFolded = ref(false);
 // ========= 搜索 =========
 function toSearch() {
   emits('toSearch');
