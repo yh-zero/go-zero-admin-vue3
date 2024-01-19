@@ -1,5 +1,3 @@
-## 移动端模板
-
 ## go-zero-admin
 
 ## vite + pinia  + ts + antDesignVue4.x + tailwindCss + formily2.x
