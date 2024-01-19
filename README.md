@@ -15,6 +15,7 @@
 ```
 
 ### 目录结构
+```js
 |-- go-zero-admin                           # 项目根目录
     |-- vite.config.ts                      # Vite 配置文件
     |-- build                                # 构建相关文件夹
@@ -46,5 +47,5 @@
     |   |-- utils                             # 工具函数文件夹
     |   |-- views                             # 视图文件夹
     |-- types                                 # 全局类型声明文件夹
-
+```
 ### 提交代码 yarn commit 命令
