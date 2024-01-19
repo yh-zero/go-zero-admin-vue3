@@ -34,6 +34,15 @@
   <SysDict type="radio" :needForm="true" dict="method" v-model:value="radioVal"></SysDict>
   <p>radio: {{ radioVal }}</p>
   <span>========================================</span>
+  <!-- 其他类型 type="text" -->
+  <SysDict labelName="TEXT类型" type="text" :id="3" :needForm="true" dict="method" v-model:value="radioVal"></SysDict>
+
+  <SysDict labelName="TEXT插槽" type="text" :id="3" :needForm="true" dict="method" v-model:value="radioVal">
+    <template #text="{ text, option }">
+      <span class="text-[red]">{{ text }}</span>
+      <span class="text-[blue]">{{ option }}</span>
+    </template>
+  </SysDict>
 </template>
 
 <script setup lang="ts">

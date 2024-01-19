@@ -1,5 +1,6 @@
 <template>
   <a-select
+    class="w-full"
     :fieldNames="fieldNames"
     v-bind="$attrs"
     optionFilterProp="label"

@@ -6,14 +6,16 @@ import SysDict from '@/components/sysDict/sysDict.vue';
 
 2. 使用组件
   **四个写入项目**
-     - dict: string;                            //字典类型  【必填】
-     - type: 'select' | 'checkbox' | 'radio';   //可选类型  【默认select】
-     - needForm?: boolean;                      //是否需要form表单格式 【默认false】
-     - labelName?: string;                      //表单label名称 【非必填】
+     - dict: string;                                   //字典类型  【必填】
+     - type: 'select' | 'checkbox' | 'radio'|'text';   //可选类型  【默认select】
+     - needForm?: boolean;                             //是否需要form表单格式 【默认false】
+     - labelName?: string;                             //表单label名称 【非必填】
+     - id?: string | number;                           //DictText组件专用 用于选出id对应的文字
 
-`** 除了上面属性 其余API均与antd-vue V4x中对应的UI组件文档一致 **`
+`** 除了上面属性 其余API均与antd-vue V4x中对应的UI组件文档一致 【text类型除外】 **`
 
-3. 例子
+
+3. 例子 【type=text 可使用插槽自定义显示】
 ```vue
 <template>
   <!-- 基本使用 -->
@@ -51,6 +53,15 @@ import SysDict from '@/components/sysDict/sysDict.vue';
   <SysDict type="radio" :needForm="true" dict="method" v-model:value="radioVal"></SysDict>
   <p>radio: {{ radioVal }}</p>
   <span>========================================</span>
+  <!-- 其他类型 type="text" -->
+  <SysDict labelName="方法名" type="text" :id="3" :needForm="true" dict="method" v-model:value="radioVal"></SysDict>
+
+  <SysDict labelName="方法名" type="text" :id="3" :needForm="true" dict="method" v-model:value="radioVal">
+    <template #text="{ text, option }">
+      <p>{{ text }}</p>
+      <p>{{ option }}</p>
+    </template>
+  </SysDict>
 </template>
 
 <script setup lang="ts">

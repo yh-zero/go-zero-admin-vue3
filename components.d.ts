@@ -52,6 +52,7 @@ declare module 'vue' {
     DictRadio: typeof import('./src/components/sysDict/modules/dictRadio.vue')['default']
     DictSelect: typeof import('./src/components/sysDict/modules/dictSelect.vue')['default']
     DictSelectByForm: typeof import('./src/components/sysDict/dictSelectByForm.vue')['default']
+    DictText: typeof import('./src/components/sysDict/modules/dictText.vue')['default']
     Footer: typeof import('./src/components/Layout/footer/index.vue')['default']
     FullScreem: typeof import('./src/components/Layout/header/modules/sysTools/utils/fullScreem.vue')['default']
     Header: typeof import('./src/components/Layout/header/index.vue')['default']
