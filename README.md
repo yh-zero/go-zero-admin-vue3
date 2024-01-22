@@ -51,4 +51,4 @@
 ```
 ### 提交代码 yarn commit 命令
 
-![角色管理](./doc/authority.png)
+<img src="./doc/authority.png" alt="角色管理"  />
