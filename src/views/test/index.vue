@@ -43,7 +43,8 @@
       <span class="text-[blue]">{{ option }}</span>
     </template>
   </SysDict>
-  <Upload :file-number="1" v-model:value="data" list-type="picture-card"></Upload>
+  {{ data }}
+  <Upload :file-number="5" v-model:value="data" list-type="picture-card"></Upload>
 </template>
 
 <script setup lang="ts">
@@ -55,7 +56,10 @@ const checkboxVal = ref();
 const radioVal = ref('');
 
 import Upload from '@/components/sysUpload/index.vue';
-const data = ref('');
+const data = ref<string[]>([
+  'https://go-zero-admin.oss-cn-beijing.aliyuncs.com/go-zero-admin/1705911992460_49814642.jfif',
+  'https://go-zero-admin.oss-cn-beijing.aliyuncs.com/go-zero-admin/1705912025787_4d5477fec18994d0adb839d47fa30937_1.jpg',
+]);
 </script>
 
 <style scoped></style>

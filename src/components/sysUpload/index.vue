@@ -1,5 +1,14 @@
 <template>
-  <a-upload :headers="headers" name="file_img" v-model:file-list="fileList" action="/v1/sys/base/uploadFileImg" :list-type="listType" :multiple="true" @change="handleChange" @preview="handlePreview">
+  <a-upload
+    :headers="headers"
+    name="file_img"
+    v-model:file-list="fileList"
+    action="/v1/sys/base/uploadFileImg"
+    :list-type="listType"
+    :multiple="true"
+    @change="handleChange"
+    @preview="handlePreview"
+  >
     <a-button v-if="listType != 'picture-card' && fileList && fileList.length < fileNumber">
       <upload-outlined></upload-outlined>
       {{ btnText }}
@@ -36,12 +45,13 @@ onMounted(() => {
   if (props.value) {
     // // 判断value的类型
     if (Array.isArray(props.value)) {
-      fileList.value = props.value.map(item => {
+      fileList.value = props.value.map((item, index) => {
         return {
-          uid: new Date().getTime() + '',
+          uid: new Date() + '' + index,
           name: item,
           status: 'done',
           response: {
+            id: 'xxxx1',
             code: 200,
             result: { fileImgUrl: item },
           },
