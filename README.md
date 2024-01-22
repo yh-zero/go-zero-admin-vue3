@@ -51,4 +51,4 @@
 ```
 ### 提交代码 yarn commit 命令
 
-![角色管理](G:\yanghao\code\github_yh\go-zero-admin-vue3\doc\authority.png)
+![角色管理](./doc/authority.png)
