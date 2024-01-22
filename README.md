@@ -50,3 +50,5 @@
     |-- types                                 # 全局类型声明文件夹
 ```
 ### 提交代码 yarn commit 命令
+
+![角色管理](G:\yanghao\code\github_yh\go-zero-admin-vue3\doc\authority.png)
