@@ -17,7 +17,7 @@ export interface MenuRespType {
   // =========
   meta: MateType;
 }
-interface MateType extends RouteMeta {
+export interface MateType extends RouteMeta {
   keepAlive: boolean; //是否缓存
   defaultMenu: boolean; //是否是基础路由
   title: string; //菜单名
