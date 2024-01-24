@@ -10,8 +10,8 @@
       hideAdd
       @tabClick="checkRouter"
     >
-      <a-tab-tab v-for="tab in tabList" :key="tab.name" :tab="tab.meta.title" :closable="tab.meta.closable">
-      </a-tab-tab>
+      <a-tab-pane v-for="tab in tabList" :key="tab.name" :tab="tab.meta.title" :closable="tab.meta.closable">
+      </a-tab-pane>
     </a-tabs>
   </div>
 </template>
@@ -34,14 +34,18 @@ interface TabType {
   query: LocationQueryRaw; //参数
   meta: MateType; //路由信息
 }
-// 标签列表
-const tabList = ref<TabType[]>([]);
 
-const activeKey = ref();
 onMounted(() => {
+  initTab();
+});
+
+// =========== 路由 ===============
+// 获取缓存中的列表
+function initTab() {
   // 添加默认路由
   setDefaultRouter(layoutStore.menuResList);
-});
+  tabList.value = getTabStorage();
+}
 const defaultTab = ref<TabType>();
 function setDefaultRouter(list: MenuRespType[]) {
   list.forEach(menu => {
@@ -60,7 +64,6 @@ function setDefaultRouter(list: MenuRespType[]) {
     }
   });
 }
-
 // 监听路由变化
 watch(
   () => route,
@@ -72,12 +75,11 @@ watch(
     addTab(to);
     // 激活tab
     activeKey.value = to.name;
-    setTabStorage(to);
   },
   { deep: true },
 );
 
-// ========== 切换路由 ==========
+//  切换路由
 function checkRouter(tabName: string) {
   tabList.value.forEach(tab => {
     if (tabName == tab.name) {
@@ -85,8 +87,14 @@ function checkRouter(tabName: string) {
     }
   });
 }
-// ========== 添加标签 ==========
+
+// =========== 标签 ===============
+// 标签列表
+const tabList = ref<TabType[]>([]);
+const activeKey = ref();
+// 添加标签
 function addTab(tab: RouteLocationNormalizedLoaded) {
+  tab.meta.closable = userStore.loginResp.userInfo.authority.defaultRouter !== tab.name; //默认路由不能关闭
   // 判断是否已经存在 不存在则添加 反之则替换
   const findIndex = tabList.value.findIndex(res => {
     return res.name == tab.name;
@@ -106,9 +114,10 @@ function addTab(tab: RouteLocationNormalizedLoaded) {
       meta: tab.meta as MateType,
     });
   }
+  setTabStorage();
 }
 
-// ========== 删除标签 ==========
+//  删除标签
 const onEdit = (targetKey: string | MouseEvent, action: string) => {
   if (action !== 'add') {
     remove(targetKey as string);
@@ -116,15 +125,19 @@ const onEdit = (targetKey: string | MouseEvent, action: string) => {
 };
 const remove = (targetKey: string) => {
   tabList.value = tabList.value.filter(tab => tab.name !== targetKey);
+  router.push({ name: tabList.value[tabList.value.length - 1].name });
+  setTabStorage();
 };
+
 // ========== sessionStorage ==========
+const TAB_SESSION_KEY = 'tabs';
 // 存储标签
-function setTabStorage(tab: RouteLocationNormalizedLoaded) {
-  return;
+function setTabStorage() {
+  window.sessionStorage.setItem(TAB_SESSION_KEY, JSON.stringify(tabList.value));
 }
-// remove
-function removeTabStorage() {
-  return;
+// 获取标签
+function getTabStorage(): TabType[] {
+  return JSON.parse(sessionStorage.getItem(TAB_SESSION_KEY) || '') || [];
 }
 </script>
 
