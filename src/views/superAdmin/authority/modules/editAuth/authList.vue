@@ -16,9 +16,11 @@
       :tree-data="menuList"
     >
       <template #title="{ meta, name, ID }">
-        <span>{{ meta.title }}{{ ID }} </span>
+        <span>{{ meta.title }} </span>
         <span v-if="defaultRouter == name" class="text-[#e6a23c] ml-2">首页</span>
-        <span @click="setDefaultRouter(name, ID)" v-else class="text-[#85ce61] ml-2 hover:text-[#e6a23c]">设置首页</span>
+        <span @click="setDefaultRouter(name, ID)" v-else class="text-[#85ce61] ml-2 hover:text-[#e6a23c]"
+          >设置首页</span
+        >
       </template>
     </a-tree>
   </div>
