@@ -12,7 +12,12 @@
     >
       <a-tab-pane v-for="tab in tabList" :key="tab.name" :closable="tab.meta.closable">
         <template #tab>
-          <a-dropdown placement="bottom" arrow v-if="tab.name !== userStore.loginResp.userInfo.authority.defaultRouter">
+          <a-dropdown
+            :trigger="['contextmenu']"
+            placement="bottom"
+            arrow
+            v-if="tab.name !== userStore.loginResp.userInfo.authority.defaultRouter"
+          >
             <span>
               {{ tab.meta.title }}
             </span>
