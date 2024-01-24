@@ -50,3 +50,28 @@
     |-- types                                 # 全局类型声明文件夹
 ```
 ### 提交代码 yarn commit 命令
+
+##### 角色管理：
+
+<img src="./doc/authority.png" alt="角色管理"  />
+
+##### 菜单管理：
+
+<img src="./doc/menu.png" alt="菜单管理"  />
+
+##### API管理：
+
+<img src="./doc/api.png" alt="api管理"  />
+
+##### 用户管理：
+
+<img src="./doc/user.png" alt="用户管理"  />
+
+##### 字典管理：
+
+<img src="./doc/dictionary.png" alt="字典管理"  />
+
+##### 字典使用例子：
+
+<img src="./doc/dictionary-usage.png" alt="字典使用例子"  />
+
