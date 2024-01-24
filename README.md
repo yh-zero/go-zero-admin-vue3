@@ -47,5 +47,3 @@
     |-- types                                 # 全局类型声明文件夹
 ```
 ### 提交代码 yarn commit 命令
-
-test

@@ -10,7 +10,26 @@
       hideAdd
       @tabClick="checkRouter"
     >
-      <a-tab-pane v-for="tab in tabList" :key="tab.name" :tab="tab.meta.title" :closable="tab.meta.closable">
+      <a-tab-pane v-for="tab in tabList" :key="tab.name" :closable="tab.meta.closable">
+        <template #tab>
+          <a-dropdown placement="bottom" arrow v-if="tab.name !== userStore.loginResp.userInfo.authority.defaultRouter">
+            <span>
+              {{ tab.meta.title }}
+            </span>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item @click="closeTabBySelect('this', tab.name)">关闭当前</a-menu-item>
+                <a-menu-item @click="closeTabBySelect('left', tab.name)">关闭左侧</a-menu-item>
+                <a-menu-item @click="closeTabBySelect('right', tab.name)">关闭右侧</a-menu-item>
+                <a-menu-item @click="closeTabBySelect('other', tab.name)">关闭其他</a-menu-item>
+                <a-menu-item @click="closeTabBySelect('all', tab.name)">关闭所有</a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+          <span v-else>
+            {{ tab.meta.title }}
+          </span>
+        </template>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -39,6 +58,41 @@ onMounted(() => {
   initTab();
 });
 
+// ========== 下拉菜单事件===========
+type SelectType = 'this' | 'left' | 'right' | 'other' | 'all';
+
+function closeTabBySelect(type: SelectType, name: string) {
+  if (type === 'this') {
+    tabList.value = tabList.value.filter(tab => tab.name !== name);
+    router.push({ name: tabList.value[tabList.value.length - 1].name });
+  } else if (type === 'left') {
+    const tabIndex = tabList.value.findIndex(tab => tab.name === name);
+    if (tabIndex !== -1) {
+      tabList.value = tabList.value.slice(tabIndex);
+      router.push({ name: tabList.value[tabList.value.length - 1].name });
+    }
+  } else if (type === 'right') {
+    const tabIndex = tabList.value.findIndex(tab => tab.name === name);
+    if (tabIndex !== -1) {
+      tabList.value = tabList.value.slice(0, tabIndex + 1);
+      router.push({ name: tabList.value[tabList.value.length - 1].name });
+    }
+  } else if (type === 'other') {
+    tabList.value = tabList.value.filter(tab => tab.name === name);
+    router.push({ name: name });
+  } else if (type === 'all') {
+    tabList.value = [];
+    router.push({ name: userStore.loginResp.userInfo.authority.defaultRouter });
+  } else {
+    console.error('Invalid type:', type);
+  }
+  // 默认路由不存在 则在数组最前面添加默认路由
+  if (tabList.value.findIndex(tab => tab.name === userStore.loginResp.userInfo.authority.defaultRouter) == -1) {
+    setDefaultRouter(layoutStore.menuResList);
+  }
+  setTabStorage();
+}
+
 // =========== 路由 ===============
 // 获取缓存中的列表
 function initTab() {
@@ -50,7 +104,7 @@ const defaultTab = ref<TabType>();
 function setDefaultRouter(list: MenuRespType[]) {
   list.forEach(menu => {
     if (userStore.loginResp.userInfo.authority.defaultRouter == menu.name) {
-      tabList.value.push({
+      tabList.value.unshift({
         name: menu.name,
         param: {},
         query: {},
@@ -141,4 +195,4 @@ function getTabStorage(): TabType[] {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
